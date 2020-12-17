@@ -1,12 +1,71 @@
-import React from 'react'
+import React, { Fragment, useState } from 'react'
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 function Login({setAuth}) {
+    const [inputs, setInputs] = useState({
+        email: "",
+        password: ""    
+    });
 
+    const endpoint = "http://localhost:1234/api/auth/login";
+    const {email, password} = inputs;
+    
+    const onChange = (e) => {
+        setInputs({...inputs, [e.target.name]: e.target.value});
+    };
+
+    const onSubmitForm = async(e) => {
+        e.preventDefault();
+        let loginBody = {
+            email: email,
+            password: password
+        }
+        // axios stuff here
+    }
     return (
-        <div>
-            <h1>Login component</h1>
-            <button onClick = {() => setAuth(true)}>Authenticate</button>
-        </div>
+        <Fragment>
+            <h1 className="text-center my-3">Login</h1>    
+            <form onSubmit={onSubmitForm}>
+                <div className="form-group col-8 offset-2">
+                    <div className="form-group row">
+                        <label htmlFor="">Email</label>
+                        <input 
+                            type="email" 
+                            name="email"
+                            placeholder="email@address.com"
+                            className="form-control"
+                            value={email}
+                            onChange={e => onChange(e)}>
+                        </input>
+                    </div>
+                    <div className="form-group row">
+                        <label htmlFor="">Password</label>
+                        <input 
+                            type="text"
+                            name="password"
+                            placeholder="********"
+                            className="form-control"
+                            value={password}
+                            onChange={e => onChange(e)}>
+                        </input>
+                    </div>
+                    <div className="form-group row justify-content-center">
+                        <div className="col-3">
+                            <button className="btn btn-primary btn-block">Login</button>
+                        </div>
+                    </div>
+                    <div className="form-group row justify-content-center">
+                        <div className="col-4">
+                            <center><Link to="/forgot">Forgot Password?</Link></center>
+                        </div>
+                        <div className="col-4">
+                            <center><Link to="/register">Create User</Link></center>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </Fragment>
     )
 }
 

@@ -1,14 +1,17 @@
 import React, { Fragment, useState } from 'react'
 import axios from 'axios';
 
-function Register() {
+function Register({setAuth}) {
 
+    // define state variables here
     const [inputs, setInputs] = useState({
         firstname: "",
         lastname: "",
         email: "",
         password: ""
     });
+    const [errorMsg, setErrorMsg] = useState("");
+
     const endpoint = "http://localhost:1234/api/auth/register"
 
     const { firstname, lastname, email, password } = inputs;
@@ -36,18 +39,21 @@ function Register() {
             }
         })
             .then(serverResponse => {
-                console.log('yay');
+                var result = serverResponse.data.result;
+                var token = result.token;
+                
+                localStorage.setItem("token", token);
+                setAuth(true);
             })
             .catch(err => {
-                console.log(err.response);
-                console.log(err.response.data);
+                console.log(err.response);                
+                // setErrorMsg("Error: " + err.response.data.result);
             });
     }
 
     return (
         <Fragment>
-            <h1 className="text-center my-3">Register User</h1>
-            
+            <h1 className="text-center my-3">Register User</h1>    
             <form onSubmit={onSubmitForm}>
                 <div className="form-group col-6 offset-3 shadow-lg p-3 mb-5 bg-white rounded">
                     <div className="form-group row">
@@ -94,6 +100,9 @@ function Register() {
                     </div>
                     <div className="form-group row">
                         <button className="btn btn-primary btn-block">Register</button>
+                    </div>
+                    <div>
+                        <p id="errorMsg">{errorMsg}</p>
                     </div>
                 </div>
             </form>
