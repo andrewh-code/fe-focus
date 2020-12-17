@@ -1,6 +1,10 @@
 import './App.css';
-import React, { Fragment, useState } from 'react';
+import './index.css';
+import './components/Sidebar.css';
+
+import React, { Fragment, useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import axios from 'axios';
 
 
 // import components
@@ -8,18 +12,42 @@ import Dashboard from './components/Dashboard';
 import Login from './components/Login';
 import Register from './components/Register';
 
+import Sidebar from './components/Sidebar';
+
 function App() {
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  
+  const endpoint = "http://localhost:1234/api/auth/verify";
 
   const setAuth = boolean => {
     setIsAuthenticated(boolean);
   }
 
+  async function isAuth() {
+    try {
+      const serverResponse = await axios.get(endpoint, {
+        headers:{
+          'Content-Type': 'application/json',
+          'authorization': 'Bearer ' + localStorage.token
+        }
+      });
+      // const parseRes = await serverResponse.json();
+      setIsAuthenticated(serverResponse.status === 200);
+
+    }catch (err){
+      console.log(err);
+    }
+  }
+
+  useEffect(() => {
+    isAuth();
+  })
+
   return (
      <Fragment>
-      <Router>
-        <div className="container">
+       <Router>
+        {/* <div className="container" id="outer-container"> */}
           <Switch>
             {/* <Route exact path = "/"/> */}
             <Route exact path = "/login" 
@@ -32,7 +60,7 @@ function App() {
               render = {props => isAuthenticated ? <Dashboard {...props} setAuth = {setAuth}/> : <Redirect to = "/login" />}
             />
           </Switch>
-        </div>
+        
       </Router>
     </Fragment>
   );

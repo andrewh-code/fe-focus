@@ -22,6 +22,25 @@ function Login({setAuth}) {
             password: password
         }
         // axios stuff here
+        axios({
+            method: 'post',
+            url: endpoint,
+            data: loginBody,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(serverResponse => {
+                var result = serverResponse.data.result;
+                var token = result.token;
+                
+                localStorage.setItem("token", token);
+                setAuth(true);
+            })
+            .catch(err => {
+                console.log(err.response);                
+                // setErrorMsg("Error: " + err.response.data.result);
+            });
     }
     return (
         <Fragment>
@@ -42,7 +61,7 @@ function Login({setAuth}) {
                     <div className="form-group row">
                         <label htmlFor="">Password</label>
                         <input 
-                            type="text"
+                            type="password"
                             name="password"
                             placeholder="********"
                             className="form-control"
