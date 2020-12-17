@@ -1,6 +1,5 @@
 import './App.css';
 import './index.css';
-import './components/Sidebar.css';
 
 import React, { Fragment, useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
@@ -11,8 +10,6 @@ import axios from 'axios';
 import Dashboard from './components/Dashboard';
 import Login from './components/Login';
 import Register from './components/Register';
-
-import Sidebar from './components/Sidebar';
 
 function App() {
 
@@ -47,7 +44,6 @@ function App() {
   return (
      <Fragment>
        <Router>
-        {/* <div className="container" id="outer-container"> */}
           <Switch>
             {/* <Route exact path = "/"/> */}
             <Route exact path = "/login" 
@@ -60,7 +56,6 @@ function App() {
               render = {props => isAuthenticated ? <Dashboard {...props} setAuth = {setAuth}/> : <Redirect to = "/login" />}
             />
           </Switch>
-        
       </Router>
     </Fragment>
   );

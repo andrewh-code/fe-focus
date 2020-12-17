@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import Sidebar from './Sidebar';
 import "../index.css";
 import "../App.css";
-import "./Sidebar.css";
+import "../css/Sidebar.css";
 
 function Dashboard({setAuth}) {
     
@@ -10,7 +10,7 @@ function Dashboard({setAuth}) {
     const logout = e => {
         console.log(e);
         e.preventDefault();
-        localStorage.removeItem("token");
+        localStorage.removeItem("token");   
         setAuth(false);
     };
 
