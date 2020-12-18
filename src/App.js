@@ -11,6 +11,7 @@ import LandingPage from './LandingPage';
 import Dashboard from './components/Dashboard';
 import Login from './components/Login';
 import Register from './components/Register';
+import Journal from './components/journal/Journal';
 
 function App() {
 
@@ -46,6 +47,7 @@ function App() {
      <Fragment>
        <Router>
           <Switch>
+            <Route exact path ="/journal" component={Journal}/>
             <Route exact path = "/"
               render = {props => !isAuthenticated ? <Login {...props} setAuth = {setAuth}/> : <Redirect to = "/dashboard" />}
               />
