@@ -2,13 +2,19 @@ import React, { Fragment, useState } from 'react'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+// css files
+import '../App.css';
+
 function Login({setAuth}) {
     const [inputs, setInputs] = useState({
         email: "",
         password: ""    
     });
 
+    const [errorMsg, setErrorMsg] = useState("");
+
     const endpoint = "http://localhost:1234/api/auth/login";
+
     const {email, password} = inputs;
     
     const onChange = (e) => {
@@ -38,8 +44,8 @@ function Login({setAuth}) {
                 setAuth(true);
             })
             .catch(err => {
-                console.log(err.response);                
-                // setErrorMsg("Error: " + err.response.data.result);
+                console.log(err.response);
+                setErrorMsg("Error: invalid email/password combination");
             });
     }
     return (
@@ -81,6 +87,9 @@ function Login({setAuth}) {
                         <div className="col-4">
                             <center><Link to="/register">Create User</Link></center>
                         </div>
+                    </div>
+                    <div>
+                        <p id="error">{errorMsg}</p>
                     </div>
                 </div>
             </form>

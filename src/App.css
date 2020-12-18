@@ -37,6 +37,6 @@
   }
 }
 
-p.errorMsg{
+p#error{
   color: red;
 }

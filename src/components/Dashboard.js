@@ -17,7 +17,7 @@ function Dashboard({setAuth}) {
     return (
         <Fragment>
             <div id="dashboard-outer-container">
-                <Sidebar pageWrapId={'page-wrap'} outerContainerId={'dashboard-outer-container'} />
+                <Sidebar setAuth = {setAuth} pageWrapId={'page-wrap'} outerContainerId={'dashboard-outer-container'} />
                 <div id="page-wrap" className="container">
                     <h1>dashboard copmonent</h1>
                     <button onClick = {e => logout(e)}>Logout</button>
