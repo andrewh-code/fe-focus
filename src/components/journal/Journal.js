@@ -1,25 +1,38 @@
 import React, { Fragment, useState} from 'react'
-import '../../css/Journal.css'
+import '../../css/Journal.css';
+import '../../App.css';
 
 export default function Journal() {
     
     const today = new Date().toLocaleDateString();
     const [journalEntry, setJournalEntry] = useState("");
+    const [feeling, setFeeling] = useState("");
+    const [errorMsg, setErrorMsg] = useState("");
+    const [successMsg, setSuccessMsg] = useState("");
 
-    
     const onSubmitEntry = async (e) => {
         e.preventDefault();
-        console.log(e);
-    }
-    
-    const onTextAreaChange = (e) => {
         
+        console.log(journalEntry);
+        console.log(feeling);
+
+        const data = {
+            feeling: feeling,
+            journalEntry: journalEntry
+        };
+        console.log(data);
+
+        // todo: axios.post here
+    }
+
+    const onTextAreaChange = (e) => {
+        setJournalEntry(e.target.value);
     }
 
     return (
         <Fragment>
-            <div clasName="container border">
-            Hello container journal
+            <div className="container border">
+            <h1>Journal Entry</h1>
             <form onSubmit={onSubmitEntry}>
                 <div className="row border">
                     <div className="col-8 offset-2 border">
@@ -33,38 +46,50 @@ export default function Journal() {
                     <div className="form-group row">
                         <div className="col-2 justify-content-center">
                             <center>
+                            <div onChange={e => setFeeling(e.target.value)}>
                             <input id="feelingAngry" type="radio" name="feelings" value="angry"/>
-                            <label for="feelingAngry"><i class="fas fa-angry fa-5x"></i></label>
+                            <label htmlFor="feelingAngry"><i className="fas fa-angry fa-5x"></i></label>
+                            </div>
                             </center>
                         </div>
                         <div className="col-2 justify-content-center">
                             <center>
+                            <div onChange={e => setFeeling(e.target.value)}>
                             <input id="feelingReallySad" type="radio" name="feelings" value="reallySad"/>
-                            <label for="feelingReallySad"><i class="fas fa-sad-cry fa-5x"></i></label>
+                            <label htmlFor="feelingReallySad"><i className="fas fa-sad-cry fa-5x"></i></label>
+                            </div>
                             </center>
                         </div>
                         <div className="col-2 justify-content-center">
                             <center>
-                                <input id="feelingSad" type="radio" name="feelings" values="sad"/>
-                                <label for="feelingSad"><i class="fas fa-frown fa-5x"></i></label>
+                                <div onChange={e => setFeeling(e.target.value)}>
+                                <input id="feelingSad" type="radio" name="feelings" value="sad"/>
+                                <label htmlFor="feelingSad"><i className="fas fa-frown fa-5x"></i></label>
+                                </div>
                             </center>
                         </div>
                         <div className="col-2 justify-content-center">
                             <center>
-                                <input id="feelingNeutral" type="radio" name="feelings" values="neutral"/>
-                                <label for="feelingNeutral"><i class="fas fa-meh fa-5x"></i></label>
+                                <div onChange={e => setFeeling(e.target.value)}>
+                                <input id="feelingNeutral" type="radio" name="feelings" value="neutral"/>
+                                <label htmlFor="feelingNeutral"><i className="fas fa-meh fa-5x"></i></label>
+                                </div>
                             </center>
                         </div>
                         <div className="col-2 justify-content-center">
                             <center>
-                                <input id="feelingGood" type="radio" name="feelings" values="good"/>
-                                <label for="feelingGood"><i class="fas fa-smile fa-5x"></i></label>
+                                <div onChange={e => setFeeling(e.target.value)}>
+                                <input id="feelingGood" type="radio" name="feelings" value="good"/>
+                                <label htmlFor="feelingGood"><i className="fas fa-smile fa-5x"></i></label>
+                                </div>
                             </center>
                         </div>
                         <div className="col-2 justify-content-center">
                             <center>
-                                <input id="feelingGreat" type="radio" name="feelings" values="great"/>
-                                <label for="feelingGreat"><i class="fas fa-grin fa-5x"></i></label>
+                                <div onChange={e => setFeeling(e.target.value)}>
+                                <input id="feelingGreat" type="radio" name="feelings" value="great"/>
+                                <label htmlFor="feelingGreat"><i className="fas fa-grin fa-5x"></i></label>
+                                </div>
                             </center>
                         </div>
                     </div>
@@ -74,15 +99,20 @@ export default function Journal() {
                     <div className="form-group row">
                         <textarea 
                             id="journalContent"
+                            name="journalEntry"
                             value={journalEntry}
                             rows="20"
                             cols="200"
-                            onChange={e => onTextAreaChange(e)}/>
+                            onChange={e => onTextAreaChange(e)}
+                            />
                     </div>
                     <div className="form-group row">
                         <div className="col-3 offset-9">
                             <button className="btn btn-primary btn-block">Save Entry</button>
                         </div>
+                    </div>
+                    <div>
+                        <p id="error">{errorMsg}</p>
                     </div>
                 </div>
             </form>
