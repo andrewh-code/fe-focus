@@ -31,7 +31,7 @@ export default function Journal() {
 
     return (
         <Fragment>
-            <div className="container border">
+            <div className="container border shadow p-3 mb-5 bg-white rounded">
             <h1>Journal Entry</h1>
             <form onSubmit={onSubmitEntry}>
                 <div className="row border">

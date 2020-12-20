@@ -17,7 +17,7 @@ function App() {
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   
-  const endpoint = "http://localhost:1234/api/auth/verify";
+  const endpoint = "http://localhost:1235/api/auth/verify";
 
   const setAuth = boolean => {
     setIsAuthenticated(boolean);
