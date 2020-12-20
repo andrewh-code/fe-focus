@@ -1,39 +1,37 @@
 import React, { Fragment, useState } from 'react'
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-function Register({setAuth}) {
+// css files
+import '../../App.css';
 
-    // define state variables here
+function Login({setAuth}) {
     const [inputs, setInputs] = useState({
-        firstname: "",
-        lastname: "",
         email: "",
-        password: ""
+        password: ""    
     });
+
     const [errorMsg, setErrorMsg] = useState("");
 
-    const endpoint = "http://localhost:1234/api/auth/register"
+    const endpoint = "http://localhost:1234/api/auth/login";
 
-    const { firstname, lastname, email, password } = inputs;
+    const {email, password} = inputs;
     
     const onChange = (e) => {
         setInputs({...inputs, [e.target.name]: e.target.value});
     };
 
     const onSubmitForm = async(e) => {
-        e.preventDefault(); // prevent the the refresh
-
-        let user = {
-            firstname: firstname,
-            lastname: lastname,
+        e.preventDefault();
+        let loginBody = {
             email: email,
             password: password
-        };
-
+        }
+        // axios stuff here
         axios({
             method: 'post',
             url: endpoint,
-            data: user,
+            data: loginBody,
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -46,36 +44,21 @@ function Register({setAuth}) {
                 setAuth(true);
             })
             .catch(err => {
-                console.log(err.response);                
-                // setErrorMsg("Error: " + err.response.data.result);
+                console.log(err.response);
+                var errorMsg = "";
+                if (!err.response){
+                    errorMsg = "Error: Unable to establish connection to server"
+                } else {
+                    errorMsg = err.response;
+                }
+                setErrorMsg(errorMsg);
             });
     }
-
     return (
         <Fragment>
-            <h1 className="text-center my-3">Register User</h1>    
+            <h1 className="text-center my-3">Login</h1>    
             <form onSubmit={onSubmitForm}>
-                <div className="form-group col-6 offset-3 rounded">
-                    <div className="form-group row">
-                        <label htmlFor="">First Name</label>
-                        <input 
-                            type="text" 
-                            name="firstname" 
-                            className="form-control"
-                            value={firstname}
-                            onChange={e => onChange(e)}>
-                        </input>
-                    </div>
-                    <div className="form-group row">
-                        <label htmlFor="">Last Name</label>
-                        <input 
-                            type="text" 
-                            name="lastname" 
-                            className="form-control"
-                            value={lastname}
-                            onChange={e => onChange(e)}>
-                        </input>
-                    </div>
+                <div className="form-group col-8 offset-2">
                     <div className="form-group row">
                         <label htmlFor="">Email</label>
                         <input 
@@ -90,7 +73,7 @@ function Register({setAuth}) {
                     <div className="form-group row">
                         <label htmlFor="">Password</label>
                         <input 
-                            type="text"
+                            type="password"
                             name="password"
                             placeholder="********"
                             className="form-control"
@@ -98,17 +81,26 @@ function Register({setAuth}) {
                             onChange={e => onChange(e)}>
                         </input>
                     </div>
-                    <div className="form-group row">
-                        <button className="btn btn-primary btn-block">Register</button>
+                    <div className="form-group row justify-content-center">
+                        <div className="col-3">
+                            <button className="btn btn-primary btn-block">Login</button>
+                        </div>
+                    </div>
+                    <div className="form-group row justify-content-center">
+                        <div className="col-4">
+                            <center><Link to="/forgot">Forgot Password?</Link></center>
+                        </div>
+                        <div className="col-4">
+                            <center><Link to="/register">Create User</Link></center>
+                        </div>
                     </div>
                     <div>
-                        <p id="errorMsg">{errorMsg}</p>
+                        <p id="error">{errorMsg}</p>
                     </div>
                 </div>
             </form>
-
         </Fragment>
     )
 }
 
-export default Register
+export default Login

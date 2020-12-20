@@ -9,9 +9,10 @@ import axios from 'axios';
 // import components
 import LandingPage from './LandingPage';
 import Dashboard from './components/Dashboard';
-import Login from './components/Login';
-import Register from './components/Register';
+import Login from './components/login/Login';
+import Register from './components/login/Register';
 import Journal from './components/journal/Journal';
+import ForgotPassword from './components/login/ForgotPassword';
 
 function App() {
 
@@ -51,6 +52,7 @@ function App() {
             <Route exact path = "/"
               render = {props => !isAuthenticated ? <Login {...props} setAuth = {setAuth}/> : <Redirect to = "/dashboard" />}
               />
+            <Route exact path = "/forgot" component={ForgotPassword}/>
             <Route exact path = "/login" 
               render = {props => !isAuthenticated ? <Login {...props} setAuth = {setAuth}/> : <Redirect to = "/dashboard" />}
             />
