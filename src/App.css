@@ -40,3 +40,16 @@
 p#error{
   color: red;
 }
+
+/* override bootstrap primary button color */
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+  background-color: #889bd3 !important;
+}
+
+/* .nav-item, .nav-link {
+  background-color: #889bd3 !important;
+} */
+/* .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus { 
+  color: #889bd3; 
+  /* background-color: transparent;
+} */

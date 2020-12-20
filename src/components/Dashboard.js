@@ -1,24 +1,56 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 import Sidebar from './Sidebar';
 import "../index.css";
 import "../App.css";
 import "../css/Sidebar.css";
 import "../css/Dashboard.css";
+import axios from 'axios';
 
 import GlobalHeader from './GlobalHeader';
 
-import pic from '../assets/images/473_mamoswine.png';
+import pic from '../assets/images/639_terrakion.png';
 
 function Dashboard({setAuth}) {
     
     // test profile pic
-    
+    const [profileInfo, setProfileInfo] = useState({
+        firstname: "",
+        lastname: "",
+        email: "",
+        address: "",
+        phoneNumber: "",
+        dob: ""
+    });
+    const { firstname, lastname, email, address, phoneNumber, dob } = profileInfo;
     const logout = e => {
         console.log(e);
         e.preventDefault();
         localStorage.removeItem("token");   
         setAuth(false);
     };
+
+    const retrieveProfileInfo = () => {
+        var endpoint = "http://localhost:1235/api/users/profile/1"
+        axios.get(endpoint, {
+            headers: {
+                'authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        })
+            .then(response => {
+                console.log(response.data);
+                setProfileInfo({
+                    firstname: response.data.firstname,
+                    lastname: response.data.lastname,
+                    email: response.data.lastname,
+                    dob: response.data.dob,
+                    address: response.data.address,
+                    phoneNumber: response.data.phoneNumber,
+                });
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
 
     return (
         <Fragment>
@@ -35,7 +67,7 @@ function Dashboard({setAuth}) {
                             <a className="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Other</a>
+                            <a className="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="Set" aria-selected="false">Settings</a>
                         </li>
                     </ul>
                     <div className="tab-content" id="myTabContent">
@@ -43,48 +75,53 @@ function Dashboard({setAuth}) {
                         
                         {/* put this into component? */}
                         <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                            <div className="container">
-                                <div className="row justify-content-center">
+                            <div className="container pt-5">
+                                <div className="row pt-3 justify-content-center">
                                     <img id="profile-pic" src={pic}></img>
                                 </div>
-                                <div className="row justify-content-center">
+                                <div className="row pt-3 justify-content-center">
                                     Profile Picture
                                 </div>
-                                <div className="row justify-content-start">
+                                <div className="row pt-3 justify-content-start">
                                     Personal Details
                                 </div>
-                                <div className="row justify-content-center">
+                                <div className="row pt-3 justify-content-center">
                                     <div className="col-3 justify-content-center">
                                         First Name
+                                        {firstname}
                                     </div>
                                     <div className="col-3 justify-content-center">
                                         Last Name
+                                        {lastname}
                                     </div>
                                     <div className="col-3 justify-content-center">
                                         Date of Birth
+                                        {dob}
                                     </div>
                                     <div className="col-3justify-content-center">
                                         Address
+                                        {address}
                                     </div>
                                 </div>
-                                <div className="row justify-content-start">
+                                <div className="row pt-3 justify-content-start">
                                     Contact Information
                                 </div>
-                                <div className="row justify-content-center">
+                                <div className="row pt-3 justify-content-center">
                                     <div className="col-3 justify-content-center">
                                         Email
+                                        {email}
                                     </div>
-                                    <div className="col-3justify-content-center">
+                                    <div className="col-3 justify-content-center">
                                         Phone Number
+                                        {phoneNumber}
                                     </div>
                                 </div>
                             </div>
-
+                            <button onClick = {retrieveProfileInfo}>hit server 2</button>
                         </div>
 
                         <div className="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">This is my contact tab</div>
                     </div>
-                    
                     <button onClick = {e => logout(e)}>Logout</button>
                 </div>
             </div>
