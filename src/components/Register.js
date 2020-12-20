@@ -55,7 +55,7 @@ function Register({setAuth}) {
         <Fragment>
             <h1 className="text-center my-3">Register User</h1>    
             <form onSubmit={onSubmitForm}>
-                <div className="form-group col-6 offset-3 shadow-lg p-3 mb-5 bg-white rounded">
+                <div className="form-group col-6 offset-3 rounded">
                     <div className="form-group row">
                         <label htmlFor="">First Name</label>
                         <input 

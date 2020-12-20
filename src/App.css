@@ -41,10 +41,17 @@ p#error{
   color: red;
 }
 
-/* override bootstrap primary button color */
-.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
-  background-color: #889bd3 !important;
+input[type=text], 
+input[type=password], 
+input[type=email] {
+  border: none;
+  border-bottom: 2px solid #A9A9A9;
 }
+
+/* override bootstrap primary button color */
+/* .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+  background-color: #889bd3 !important;
+} */
 
 /* .nav-item, .nav-link {
   background-color: #889bd3 !important;

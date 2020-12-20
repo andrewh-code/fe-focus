@@ -45,7 +45,13 @@ function Login({setAuth}) {
             })
             .catch(err => {
                 console.log(err.response);
-                setErrorMsg("Error: invalid email/password combination");
+                var errorMsg = "";
+                if (!err.response){
+                    errorMsg = "Error: Unable to establish connection to server"
+                } else {
+                    errorMsg = err.response;
+                }
+                setErrorMsg(errorMsg);
             });
     }
     return (

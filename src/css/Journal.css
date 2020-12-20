@@ -57,3 +57,17 @@ input[type="radio"]:checked + label[for="feelingGreat"] {
     padding: 1px;
     box-shadow: 1px 2px #A9A9A9;
 }
+
+/* border for text input  */
+textarea {
+    border: 1px solid #A9A9A9;
+}
+
+input[type=text] {
+    border: none;
+    border-bottom: 2px solid #A9A9A9;
+}
+
+textarea, input[type=text]:focus {
+    outline: none;
+}

@@ -1,11 +1,13 @@
 import React, { Fragment, useState} from 'react'
 import '../../css/Journal.css';
 import '../../App.css';
+import GlobalHeader from '../GlobalHeader';
 
 export default function Journal() {
     
     const today = new Date().toLocaleDateString();
     const [journalEntry, setJournalEntry] = useState("");
+    const [entryTitle, setEntryTitle] = useState("");
     const [feeling, setFeeling] = useState("");
     const [errorMsg, setErrorMsg] = useState("");
     const [successMsg, setSuccessMsg] = useState("");
@@ -18,8 +20,10 @@ export default function Journal() {
 
         const data = {
             feeling: feeling,
-            journalEntry: journalEntry
+            journalEntry: journalEntry,
+            entryTitle: entryTitle
         };
+
         console.log(data);
 
         // todo: axios.post here
@@ -28,15 +32,21 @@ export default function Journal() {
     const onTextAreaChange = (e) => {
         setJournalEntry(e.target.value);
     }
+    const onTitleChange = (e) => {
+        setEntryTitle(e.target.value);
+    }
 
     return (
         <Fragment>
+            <GlobalHeader/>
             <div className="container border shadow p-3 mb-5 bg-white rounded">
-            <h1>Journal Entry</h1>
+            <center><h1>Journal Entry</h1></center>
             <form onSubmit={onSubmitEntry}>
-                <div className="row border">
-                    <div className="col-8 offset-2 border">
+                <div className="row">
+                    <div className="col-8 offset-2">
+                        {/* there's like a 3px offset here */}
                         Today: {today}
+                        <hr/>
                     </div>
                 </div>
                 <div className="form-group col-8 offset-2">
@@ -50,6 +60,7 @@ export default function Journal() {
                             <input id="feelingAngry" type="radio" name="feelings" value="angry"/>
                             <label htmlFor="feelingAngry"><i className="fas fa-angry fa-5x"></i></label>
                             </div>
+                            <hr/>
                             </center>
                         </div>
                         <div className="col-2 justify-content-center">
@@ -58,6 +69,7 @@ export default function Journal() {
                             <input id="feelingReallySad" type="radio" name="feelings" value="reallySad"/>
                             <label htmlFor="feelingReallySad"><i className="fas fa-sad-cry fa-5x"></i></label>
                             </div>
+                            <hr/>
                             </center>
                         </div>
                         <div className="col-2 justify-content-center">
@@ -66,6 +78,7 @@ export default function Journal() {
                                 <input id="feelingSad" type="radio" name="feelings" value="sad"/>
                                 <label htmlFor="feelingSad"><i className="fas fa-frown fa-5x"></i></label>
                                 </div>
+                                <hr/>
                             </center>
                         </div>
                         <div className="col-2 justify-content-center">
@@ -74,6 +87,7 @@ export default function Journal() {
                                 <input id="feelingNeutral" type="radio" name="feelings" value="neutral"/>
                                 <label htmlFor="feelingNeutral"><i className="fas fa-meh fa-5x"></i></label>
                                 </div>
+                                <hr/>
                             </center>
                         </div>
                         <div className="col-2 justify-content-center">
@@ -82,6 +96,7 @@ export default function Journal() {
                                 <input id="feelingGood" type="radio" name="feelings" value="good"/>
                                 <label htmlFor="feelingGood"><i className="fas fa-smile fa-5x"></i></label>
                                 </div>
+                                <hr/>
                             </center>
                         </div>
                         <div className="col-2 justify-content-center">
@@ -90,6 +105,7 @@ export default function Journal() {
                                 <input id="feelingGreat" type="radio" name="feelings" value="great"/>
                                 <label htmlFor="feelingGreat"><i className="fas fa-grin fa-5x"></i></label>
                                 </div>
+                                <hr/>
                             </center>
                         </div>
                     </div>
@@ -105,6 +121,19 @@ export default function Journal() {
                             cols="200"
                             onChange={e => onTextAreaChange(e)}
                             />
+                    </div>
+                    <hr/>
+                    <div className="form-group row">
+                        Title for Today's Entry:
+                    </div>
+                    <div className="form-group row">
+                        <input 
+                            type="text" 
+                            name="entryTitle"
+                            size="40"
+                            value={entryTitle}
+                            onChange={e => onTitleChange(e)}>
+                        </input>
                     </div>
                     <div className="form-group row">
                         <div className="col-3 offset-9">
