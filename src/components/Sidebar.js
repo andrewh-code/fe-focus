@@ -15,7 +15,7 @@ function Sidebar({setAuth}) {
         <a className="menu-item" href="/dashboard">
           Home
         </a>
-        <a className="menu-item" href="/profile">
+        <a className="menu-item" href="/dashboard">
           Profile
         </a>
         <a className="menu-item" href="/journal">

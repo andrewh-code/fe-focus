@@ -19,9 +19,14 @@ function Dashboard({setAuth}) {
         email: "",
         address: "",
         phoneNumber: "",
-        dob: ""
+        dob: "",
+        country: "",
+        postalCode: "",
+        city: "",
+        province: ""
     });
-    const { firstname, lastname, email, address, phoneNumber, dob } = profileInfo;
+    
+    const { firstname, lastname, email, address, phoneNumber, dob, country, postalCode, city, province } = profileInfo;
     const logout = e => {
         console.log(e);
         e.preventDefault();
@@ -45,6 +50,10 @@ function Dashboard({setAuth}) {
                     dob: response.data.dob,
                     address: response.data.address,
                     phoneNumber: response.data.phoneNumber,
+                    country: response.data.country,
+                    province: response.data.province,
+                    postalCode: response.data.postalCode,
+                    city: response.data.city
                 });
             })
             .catch((err) => {
@@ -86,21 +95,45 @@ function Dashboard({setAuth}) {
                                     Personal Details
                                 </div>
                                 <div className="row pt-3 justify-content-center">
-                                    <div className="col-3 justify-content-center">
-                                        First Name
+                                    <div className="col-3 text-center">
+                                        <b>First Name</b>
+                                        <br/>
                                         {firstname}
                                     </div>
-                                    <div className="col-3 justify-content-center">
-                                        Last Name
+                                    <div className="col-3 text-center">
+                                        <b>Last Name</b>
+                                        <br/>
                                         {lastname}
                                     </div>
-                                    <div className="col-3 justify-content-center">
-                                        Date of Birth
+                                    <div className="col-3 text-center">
+                                        <b>Date of Birth</b>
+                                        <br/>
                                         {dob}
                                     </div>
-                                    <div className="col-3justify-content-center">
-                                        Address
+                                    <div className="col-3 text-center">
+                                        <b>Address</b>
+                                        <br/>
                                         {address}
+                                    </div>
+                                </div>
+                                <div className="row pt-3 justify-content-center">
+                                <div className="col-3 text-center">
+                                        <b>City</b>
+                                        <br/>
+                                        {city}
+                                    </div>
+                                    <div className="col-3 text-center">
+                                        <b>Province</b>
+                                        <br/>
+                                        {province}
+                                    </div>
+                                    <div className="col-3 text-center">
+                                        <b>Postal Code</b>
+                                        <br/>
+                                        {postalCode}
+                                    </div>
+                                    <div className="col-3 text-center">
+                                        
                                     </div>
                                 </div>
                                 <div className="row pt-3 justify-content-start">
