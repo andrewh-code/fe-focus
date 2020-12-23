@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
 import Sidebar from './Sidebar';
 import "../index.css";
 import "../App.css";
@@ -23,10 +23,10 @@ function Dashboard({setAuth}) {
         country: "",
         postalCode: "",
         city: "",
-        province: ""
+        provinceState: ""
     });
     
-    const { firstname, lastname, email, address, phoneNumber, dob, country, postalCode, city, province } = profileInfo;
+    const { firstname, lastname, email, address, phoneNumber, dob, country, postalCode, city, provinceState } = profileInfo;
     const logout = e => {
         console.log(e);
         e.preventDefault();
@@ -34,26 +34,80 @@ function Dashboard({setAuth}) {
         setAuth(false);
     };
 
-    const retrieveProfileInfo = () => {
-        var endpoint = "http://localhost:1235/api/users/profile/1"
+    const parseToken = (token) =>{
+        if (!token){
+            return;
+        }
+        const url = token.split('.')[1];
+        const base = url.replace('-', '+').replace('_', '/');
+        return JSON.parse(window.atob(base)); 
+    };
+
+    useEffect(() => {
+        let mounted = true;
+        
+        // retrieve user id from the bearer token
+        const token = localStorage.getItem("token");
+        const decryptedTokenInfo = parseToken(token);
+        const userId = decryptedTokenInfo.userId;
+
+        var endpoint = `http://localhost:1234/api/users/${userId}/profile`
         axios.get(endpoint, {
             headers: {
-                'authorization': 'Bearer ' + localStorage.getItem('token')
+                'authorization': 'Bearer ' + token
+            }
+        })
+            .then(response => {
+                if (mounted) {
+                    console.log(response.data);
+                    // format the date                
+                    setProfileInfo({
+                        firstname: response.data.result.firstname,
+                        lastname: response.data.result.lastname,
+                        email: response.data.result.lastname,
+                        dob: response.data.result.dob,
+                        address: response.data.result.streetAddress,
+                        phoneNumber: response.data.result.phoneNumber,
+                        country: response.data.result.country,
+                        provinceState: response.data.result.provinceState,
+                        postalCode: response.data.result.postalCode,
+                        city: response.data.result.city
+                    });
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+            return () => mounted = false;
+    }, []);
+
+    const retrieveProfileInfo = () => {
+
+        // retrieve user id from the bearer token
+        const token = localStorage.getItem("token");
+        const decryptedTokenInfo = parseToken(token);
+        const userId = decryptedTokenInfo.userId;
+
+        var endpoint = `http://localhost:1234/api/users/${userId}/profile`
+        axios.get(endpoint, {
+            headers: {
+                'authorization': 'Bearer ' + token
             }
         })
             .then(response => {
                 console.log(response.data);
+                // format the date                
                 setProfileInfo({
-                    firstname: response.data.firstname,
-                    lastname: response.data.lastname,
-                    email: response.data.lastname,
-                    dob: response.data.dob,
-                    address: response.data.address,
-                    phoneNumber: response.data.phoneNumber,
-                    country: response.data.country,
-                    province: response.data.province,
-                    postalCode: response.data.postalCode,
-                    city: response.data.city
+                    firstname: response.data.result.firstname,
+                    lastname: response.data.result.lastname,
+                    email: response.data.result.email,
+                    dob: response.data.result.dob,
+                    address: response.data.result.streetAddress,
+                    phoneNumber: response.data.result.phoneNumber,
+                    country: response.data.result.country,
+                    provinceState: response.data.result.provinceState,
+                    postalCode: response.data.result.postalCode,
+                    city: response.data.result.city
                 });
             })
             .catch((err) => {
@@ -123,9 +177,9 @@ function Dashboard({setAuth}) {
                                         {city}
                                     </div>
                                     <div className="col-3 text-center">
-                                        <b>Province</b>
+                                        <b>Province/State</b>
                                         <br/>
-                                        {province}
+                                        {provinceState}
                                     </div>
                                     <div className="col-3 text-center">
                                         <b>Postal Code</b>
@@ -133,7 +187,9 @@ function Dashboard({setAuth}) {
                                         {postalCode}
                                     </div>
                                     <div className="col-3 text-center">
-                                        
+                                        <b>Country</b>
+                                        <br/>
+                                        {country}
                                     </div>
                                 </div>
                                 <div className="row pt-3 justify-content-start">
@@ -141,16 +197,18 @@ function Dashboard({setAuth}) {
                                 </div>
                                 <div className="row pt-3 justify-content-center">
                                     <div className="col-3 justify-content-center">
-                                        Email
+                                        <b>Email</b>
+                                        <br/>
                                         {email}
                                     </div>
                                     <div className="col-3 justify-content-center">
-                                        Phone Number
+                                        <b>Phone Number</b>
+                                        <br/>
                                         {phoneNumber}
                                     </div>
                                 </div>
                             </div>
-                            <button onClick = {retrieveProfileInfo}>hit server 2</button>
+                            {/* <button onClick = {retrieveProfileInfo}>hit server 2</button> */}
                         </div>
 
                         <div className="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">This is my contact tab</div>
