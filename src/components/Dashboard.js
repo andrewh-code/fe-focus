@@ -51,7 +51,7 @@ function Dashboard({setAuth}) {
         const decryptedTokenInfo = parseToken(token);
         const userId = decryptedTokenInfo.userId;
 
-        var endpoint = `http://localhost:1234/api/users/${userId}/profile`
+        var endpoint = `http://localhost:1236/dashboard/api/users/${userId}/profile`
         axios.get(endpoint, {
             headers: {
                 'authorization': 'Bearer ' + token
@@ -81,46 +81,12 @@ function Dashboard({setAuth}) {
             return () => mounted = false;
     }, []);
 
-    const retrieveProfileInfo = () => {
-
-        // retrieve user id from the bearer token
-        const token = localStorage.getItem("token");
-        const decryptedTokenInfo = parseToken(token);
-        const userId = decryptedTokenInfo.userId;
-
-        var endpoint = `http://localhost:1234/api/users/${userId}/profile`
-        axios.get(endpoint, {
-            headers: {
-                'authorization': 'Bearer ' + token
-            }
-        })
-            .then(response => {
-                console.log(response.data);
-                // format the date                
-                setProfileInfo({
-                    firstname: response.data.result.firstname,
-                    lastname: response.data.result.lastname,
-                    email: response.data.result.email,
-                    dob: response.data.result.dob,
-                    address: response.data.result.streetAddress,
-                    phoneNumber: response.data.result.phoneNumber,
-                    country: response.data.result.country,
-                    provinceState: response.data.result.provinceState,
-                    postalCode: response.data.result.postalCode,
-                    city: response.data.result.city
-                });
-            })
-            .catch((err) => {
-                console.log(err);
-            })
-    }
-
     return (
         <Fragment>
             <div id="dashboard-outer-container">
                 <Sidebar setAuth = {setAuth} pageWrapId={'page-wrap'} outerContainerId={'dashboard-outer-container'} />
                 <GlobalHeader setAuth={setAuth}/>
-                <div id="page-wrap" className="container border">
+                <div id="page-wrap" className="container shadow p-3 mb-5 bg-white rounded">
                     <h1>Your Dashboard</h1>
                     <ul className="nav nav-pills nav-justified" id="myTab" role="tablist">
                         <li className="nav-item">

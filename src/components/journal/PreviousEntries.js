@@ -1,17 +1,20 @@
-import React from 'react'
+import React, { Fragment, useState } from 'react'
+
 
 function PreviousEntries() {
     return (
-        <div className="container border">
-            <div className="row">
-                <div className="col-3 border">
-                    Previous Entries
-                </div>
-                <div className="col-9">
-                    <center>Journal Entry</center>
+        <Fragment>
+            <div className="container">
+                <div className="row border">
+                    <div className="col-3">
+                        col2
+                    </div>
+                    <div className="col-9">
+                        col22
+                    </div>
                 </div>
             </div>
-        </div>
+        </Fragment>
     )
 }
 
