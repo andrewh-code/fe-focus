@@ -4,8 +4,9 @@ import '../../App.css';
 import GlobalHeader from '../GlobalHeader';
 import Entry from './Entry';
 import PreviousEntries from './PreviousEntries';
+import Sidebar from '../Sidebar';
 
-export default function Journal() {
+export default function Journal({setAuth}) {
     
     const [resultOutput, setResultOutput] = useState("");
     const [entryContent, setEntryContent] = useState("");
@@ -173,59 +174,62 @@ export default function Journal() {
 
     return (
         <Fragment>
-            <GlobalHeader/>
-            <div id="journal" className="container border shadow p-3 mb-5 bg-white rounded">
-                <h1>Journal</h1>
-                <ul className="nav nav-pills nav-justified" id="myTab" role="tablist">
-                    <li className="nav-item">
-                        <a className="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Write Entry</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">View Previous Entries</a>
-                    </li>
-                </ul>
-                <div className="tab-content" id="myTabContent">
-                    <div className="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <Entry />
-                        {/* <div className="container">
-                            container
-                            <div className="row">
-                                row
-                                <div className="col-8 offset-2">
-                                    col-8 offset-2
+            <div id="journal-outer-container">
+                <Sidebar setAuth = {setAuth} pageWrapId={'page-wrap'} outerContainerId={'journal-outer-container'} />
+                <GlobalHeader setAuth={setAuth}/>
+                <div id="page-wrap" className="container border shadow p-3 mb-5 bg-white rounded">
+                    <h1>Journal</h1>
+                    <ul className="nav nav-pills nav-justified" id="myTab" role="tablist">
+                        <li className="nav-item">
+                            <a className="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Write Entry</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">View Previous Entries</a>
+                        </li>
+                    </ul>
+                    <div className="tab-content" id="myTabContent">
+                        <div className="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <Entry />
+                            {/* <div className="container">
+                                container
+                                <div className="row">
+                                    row
+                                    <div className="col-8 offset-2">
+                                        col-8 offset-2
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="form-group col-8 offset-2">
-                                form-group col-8 offset-2
-                                <div className="form-group row">
+                                <div className="form-group col-8 offset-2">
+                                    form-group col-8 offset-2
+                                    <div className="form-group row">
 
+                                    </div>
+                                    <div className="form-group row">
+                                        
+                                    </div>
                                 </div>
-                                <div className="form-group row">
-                                    
-                                </div>
-                            </div>
-                        </div> */}
-                    </div>
-                    <div className="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        
-                        <div className="container">
-                            <div className="row justify-content-center">
-                                <div className="col-3 pt-1 border justify-content-center">
-                                    <h5>Previous Entries</h5>
-                                </div>
-                                <div className="col-9 pt-1 border justify-content-center">
-                                    <h5>Journal Entry</h5>
-                                </div>
-                            </div>
-                            <div className="row">
+                            </div> */}
+                        </div>
+                        <div className="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                             
-                                <div className="col-3">
-                                    {resultOutput}
-                            
+                            <div className="container">
+                                <div className="row justify-content-center">
+                                    <div className="col-3 pt-1 border justify-content-center">
+                                        <h5>Previous Entries</h5>
+                                    </div>
+                                    <div className="col-9 pt-1 border justify-content-center">
+                                        <h5>Journal Entry</h5>
+                                    </div>
                                 </div>
-                            
-                                <div className="col-9">
-                                    {entryContent}
+                                <div className="row">
+                                
+                                    <div className="col-3">
+                                        {resultOutput}
+                                
+                                    </div>
+                                
+                                    <div className="col-9">
+                                        {entryContent}
+                                    </div>
                                 </div>
                             </div>
                         </div>

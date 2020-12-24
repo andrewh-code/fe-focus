@@ -13,7 +13,6 @@ import Login from './components/login/Login';
 import Register from './components/login/Register';
 import Journal from './components/journal/Journal';
 import ForgotPassword from './components/login/ForgotPassword';
-import TestComponent from './components/TestComponent';
 
 function App() {
 
