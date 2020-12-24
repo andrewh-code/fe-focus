@@ -49,56 +49,56 @@ function Entry() {
                         How were you today? (define colour scheme)
                     </div>
                     <div className="form-group row">
-                        <div className="col-2 justify-content-center">
+                        <div className="col-2">
                             <center>
                                 <div onChange={e => setFeeling(e.target.value)}>
                                     <input id="feelingAngry" type="radio" name="feelings" value="angry" />
-                                    <label htmlFor="feelingAngry"><i className="fas fa-angry fa-5x"></i></label>
+                                    <label htmlFor="feelingAngry"><i className="fas fa-angry fa-4x"></i></label>
                                 </div>
                                 <hr />
                             </center>
                         </div>
-                        <div className="col-2 justify-content-center">
+                        <div className="col-2">
                             <center>
                                 <div onChange={e => setFeeling(e.target.value)}>
                                     <input id="feelingReallySad" type="radio" name="feelings" value="reallySad" />
-                                    <label htmlFor="feelingReallySad"><i className="fas fa-sad-cry fa-5x"></i></label>
+                                    <label htmlFor="feelingReallySad"><i className="fas fa-sad-cry fa-4x"></i></label>
                                 </div>
                                 <hr />
                             </center>
                         </div>
-                        <div className="col-2 justify-content-center">
+                        <div className="col-2">
                             <center>
                                 <div onChange={e => setFeeling(e.target.value)}>
                                     <input id="feelingSad" type="radio" name="feelings" value="sad" />
-                                    <label htmlFor="feelingSad"><i className="fas fa-frown fa-5x"></i></label>
+                                    <label htmlFor="feelingSad"><i className="fas fa-frown fa-4x"></i></label>
                                 </div>
                                 <hr />
                             </center>
                         </div>
-                        <div className="col-2 justify-content-center">
+                        <div className="col-2">
                             <center>
                                 <div onChange={e => setFeeling(e.target.value)}>
                                     <input id="feelingNeutral" type="radio" name="feelings" value="neutral" />
-                                    <label htmlFor="feelingNeutral"><i className="fas fa-meh fa-5x"></i></label>
+                                    <label htmlFor="feelingNeutral"><i className="fas fa-meh fa-4x"></i></label>
                                 </div>
                                 <hr />
                             </center>
                         </div>
-                        <div className="col-2 justify-content-center">
+                        <div className="col-2">
                             <center>
                                 <div onChange={e => setFeeling(e.target.value)}>
                                     <input id="feelingGood" type="radio" name="feelings" value="good" />
-                                    <label htmlFor="feelingGood"><i className="fas fa-smile fa-5x"></i></label>
+                                    <label htmlFor="feelingGood"><i className="fas fa-smile fa-4x"></i></label>
                                 </div>
                                 <hr />
                             </center>
                         </div>
-                        <div className="col-2 justify-content-center">
+                        <div className="col-2">
                             <center>
                                 <div onChange={e => setFeeling(e.target.value)}>
                                     <input id="feelingGreat" type="radio" name="feelings" value="great" />
-                                    <label htmlFor="feelingGreat"><i className="fas fa-grin fa-5x"></i></label>
+                                    <label htmlFor="feelingGreat"><i className="fas fa-grin fa-4x"></i></label>
                                 </div>
                                 <hr />
                             </center>
@@ -112,7 +112,7 @@ function Entry() {
                             id="journalContent"
                             name="journalEntry"
                             value={journalEntry}
-                            rows="20"
+                            rows="18"
                             cols="200"
                             onChange={e => onTextAreaChange(e)}
                         />

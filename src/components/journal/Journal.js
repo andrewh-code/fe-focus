@@ -186,9 +186,28 @@ export default function Journal() {
                 </ul>
                 <div className="tab-content" id="myTabContent">
                     <div className="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        {/* <Entry /> */}
+                        <Entry />
+                        {/* <div className="container">
+                            container
+                            <div className="row">
+                                row
+                                <div className="col-8 offset-2">
+                                    col-8 offset-2
+                                </div>
+                            </div>
+                            <div className="form-group col-8 offset-2">
+                                form-group col-8 offset-2
+                                <div className="form-group row">
+
+                                </div>
+                                <div className="form-group row">
+                                    
+                                </div>
+                            </div>
+                        </div> */}
                     </div>
                     <div className="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        
                         <div className="container">
                             <div className="row justify-content-center">
                                 <div className="col-3 pt-1 border justify-content-center">
@@ -199,12 +218,12 @@ export default function Journal() {
                                 </div>
                             </div>
                             <div className="row">
-                                {/* loop here */}
+                            
                                 <div className="col-3">
                                     {resultOutput}
-                                    {/* {renderJournalEntryList()} */}
+                            
                                 </div>
-                                {/* set this as a variable */}
+                            
                                 <div className="col-9">
                                     {entryContent}
                                 </div>
