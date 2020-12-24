@@ -174,7 +174,7 @@ export default function Journal() {
     return (
         <Fragment>
             <GlobalHeader/>
-            <div className="container border shadow p-3 mb-5 bg-white rounded">
+            <div id="journal" className="container border shadow p-3 mb-5 bg-white rounded">
                 <h1>Journal</h1>
                 <ul className="nav nav-pills nav-justified" id="myTab" role="tablist">
                     <li className="nav-item">
