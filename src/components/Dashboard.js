@@ -34,15 +34,6 @@ function Dashboard({setAuth}) {
         setAuth(false);
     };
 
-    const parseToken = (token) =>{
-        if (!token){
-            return;
-        }
-        const url = token.split('.')[1];
-        const base = url.replace('-', '+').replace('_', '/');
-        return JSON.parse(window.atob(base)); 
-    };
-
     useEffect(() => {
         let mounted = true;
         
