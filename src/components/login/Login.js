@@ -49,7 +49,7 @@ function Login({setAuth}) {
                 if (!err.response){
                     errorMsg = "Error: Unable to establish connection to server"
                 } else {
-                    errorMsg = err.response;
+                    errorMsg = err.response.data.result;
                 }
                 setErrorMsg(errorMsg);
             });

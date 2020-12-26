@@ -1,13 +1,17 @@
 import React from 'react'
 import { slide as Menu } from 'react-burger-menu';
+import { useHistory } from 'react-router-dom';
 
 function Sidebar({setAuth}) {
-    
+  
+  const history = useHistory();
+
   const logout = e => {
       console.log(e);
       e.preventDefault();
       localStorage.removeItem("token");   
       setAuth(false);
+      history.push("/login");
   };
 
     return (

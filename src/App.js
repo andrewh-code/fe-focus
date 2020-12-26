@@ -2,7 +2,7 @@ import './App.css';
 import './index.css';
 
 import React, { Fragment, useState, useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect, useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 
@@ -16,7 +16,7 @@ import ForgotPassword from './components/login/ForgotPassword';
 
 function App() {
 
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(isAuth());
   
   const endpoint = "http://localhost:1234/api/auth/verify";
 
@@ -33,10 +33,12 @@ function App() {
         }
       });
       // const parseRes = await serverResponse.json();
-      setIsAuthenticated(serverResponse.status === 200);
-
+      // setIsAuthenticated(serverResponse.status === 200);
+      return true;
     }catch (err){
       console.log(err);
+      // setIsAuthenticated(false);
+      return false;
     }
   }
 
@@ -49,20 +51,20 @@ function App() {
        <Router>
           <Switch>
             <Route exact path = "/"
-              render = {props => !isAuth() ? <Login {...props} setAuth = {setAuth}/> : <Redirect to = "/dashboard" />}
+              render = {props => !isAuthenticated ? <Login {...props} setAuth = {setAuth}/> : <Redirect to = "/dashboard" />}
               />
             <Route exact path = "/forgot" component={ForgotPassword}/>
             <Route exact path = "/login" 
-              render = {props => !isAuth() ? <Login {...props} setAuth = {setAuth}/> : <Redirect to = "/dashboard" />}
+              render = {props => !isAuthenticated ? <Login {...props} setAuth = {setAuth}/> : <Redirect to = "/dashboard" />}
             />
             <Route exact path = "/register" 
-              render = {props => !isAuth() ? <Register {...props} setAuth = {setAuth}/> : <Redirect to = "/login"/>}
+              render = {props => !isAuthenticated ? <Register {...props} setAuth = {setAuth}/> : <Redirect to = "/login"/>}
               />
             <Route exact path = "/dashboard" 
-              render = {props => isAuth() ? <Dashboard {...props} setAuth = {setAuth}/> : <Redirect to = "/login" />}
+              render = {props => isAuthenticated ? <Dashboard {...props} setAuth = {setAuth}/> : <Redirect to = "/login" />}
             />
             <Route exact path = "/journal"
-              render = {props => isAuth() ? <Journal {...props} setAuth = {setAuth}/> : <Redirect to ="/login" />}
+              render = {props => isAuthenticated ? <Journal {...props} setAuth = {setAuth}/> : <Redirect to ="/login" />}
             />
           </Switch>
       </Router>

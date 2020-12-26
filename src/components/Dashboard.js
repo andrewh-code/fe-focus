@@ -9,6 +9,7 @@ import axios from 'axios';
 import GlobalHeader from './GlobalHeader';
 
 import pic from '../assets/images/639_terrakion.png';
+import { Redirect } from 'react-router';
 
 function Dashboard({setAuth}) {
     
@@ -27,6 +28,16 @@ function Dashboard({setAuth}) {
     });
     
     const { firstname, lastname, email, address, phoneNumber, dob, country, postalCode, city, provinceState } = profileInfo;
+    
+    const parseToken = (token) =>{
+        if (!token){
+            return;
+        }
+        const url = token.split('.')[1];
+        const base = url.replace('-', '+').replace('_', '/');
+        return JSON.parse(window.atob(base)); 
+    };
+
     const logout = e => {
         console.log(e);
         e.preventDefault();
@@ -39,7 +50,8 @@ function Dashboard({setAuth}) {
         
         // retrieve user id from the bearer token
         const token = localStorage.getItem("token");
-        const decryptedTokenInfo = parseToken(token);
+        if (token) {
+            const decryptedTokenInfo = parseToken(token);
         const userId = decryptedTokenInfo.userId;
 
         var endpoint = `http://localhost:1236/dashboard/api/users/${userId}/profile`
@@ -69,7 +81,9 @@ function Dashboard({setAuth}) {
             .catch((err) => {
                 console.log(err);
             })
-            return () => mounted = false;
+        }
+        
+        return () => mounted = false;
     }, []);
 
     return (
@@ -170,7 +184,7 @@ function Dashboard({setAuth}) {
 
                         <div className="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">This is my contact tab</div>
                     </div>
-                    <button onClick = {e => logout(e)}>Logout</button>
+                    <button class="btn btn-primary" onClick = {e => logout(e)}>Logout</button>
                 </div>
             </div>
         </Fragment>
