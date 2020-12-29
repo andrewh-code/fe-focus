@@ -35,9 +35,9 @@ export default function Journal({setAuth}) {
             <div id="journal-outer-container">
                 <Sidebar setAuth = {setAuth} pageWrapId={'page-wrap'} outerContainerId={'journal-outer-container'} />
                 <GlobalHeader setAuth={setAuth}/>
-                <div id="page-wrap" className="container border shadow p-3 mb-5 bg-white rounded">
-                    <h1>Journal</h1>
-                    <ul className="nav nav-pills nav-justified" id="myTab" role="tablist">
+                <div id="page-wrap" className="container border shadow p-3 mb-5 bg-white">
+                    <center><h1>Journal</h1></center>
+                    <ul className="nav nav-pills nav-justified pt-3" id="myTab" role="tablist">
                         <li className="nav-item">
                             <a className="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Write Entry</a>
                         </li>
@@ -45,7 +45,7 @@ export default function Journal({setAuth}) {
                             <a className="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">View Previous Entries</a>
                         </li>
                     </ul>
-                    <div className="tab-content" id="myTabContent">
+                    <div className="tab-content pt-3" id="myTabContent">
                         <div className="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
                             <Entry />
                         </div>

@@ -81,13 +81,13 @@ function Entry() {
                 <div className="row">
                     <div className="col-8 offset-2">
                         {/* there's like a 3px offset here */}
-                        Today: {today}
+                        <p id="bold">Today:</p> {today}
                         <hr />
                     </div>
                 </div>
                 <div className="form-group col-8 offset-2">
                     <div className="form-group row">
-                        How were you today? (define colour scheme)
+                        <p id="bold">How were you today? (define colour scheme)</p>
                     </div>
                     <div className="form-group row">
                         <div className="col-2">
@@ -146,7 +146,7 @@ function Entry() {
                         </div>
                     </div>
                     <div className="form-group row">
-                        What happened?
+                        <p id="bold">What happened?</p>
                     </div>
                     <div className="form-group row">
                         <textarea
@@ -160,7 +160,7 @@ function Entry() {
                     </div>
                     <hr />
                     <div className="form-group row">
-                        Title for Today's Entry:
+                    <p id="bold">Title for Today's Entry:</p>
                     </div>
                     <div className="form-group row">
                         <input

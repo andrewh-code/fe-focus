@@ -43,8 +43,12 @@ function App() {
   }
 
   useEffect(() => {
-    isAuth();
-  })
+      const authResult = async () => {
+        var result = isAuth();
+        setIsAuthenticated(result);
+      }
+      authResult();
+  }, []);
 
   return (
      <Fragment>

@@ -92,8 +92,8 @@ function Dashboard({setAuth}) {
                 <Sidebar setAuth = {setAuth} pageWrapId={'page-wrap'} outerContainerId={'dashboard-outer-container'} />
                 <GlobalHeader setAuth={setAuth}/>
                 <div id="page-wrap" className="container shadow p-3 mb-5 bg-white rounded">
-                    <h1>Your Dashboard</h1>
-                    <ul className="nav nav-pills nav-justified" id="myTab" role="tablist">
+                    <center><h1>Your Dashboard</h1></center>
+                    <ul className="nav nav-pills nav-justified pt-3" id="myTab" role="tablist">
                         <li className="nav-item">
                             <a className="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Dashboard</a>
                         </li>
@@ -106,7 +106,6 @@ function Dashboard({setAuth}) {
                     </ul>
                     <div className="tab-content" id="myTabContent">
                         <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">This is my home tab</div>
-                        
                         {/* put this into component? */}
                         <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                             <div className="container pt-5">
@@ -184,7 +183,7 @@ function Dashboard({setAuth}) {
 
                         <div className="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">This is my contact tab</div>
                     </div>
-                    <button class="btn btn-primary" onClick = {e => logout(e)}>Logout</button>
+                    <button className="btn btn-primary" onClick = {e => logout(e)}>Logout</button>
                 </div>
             </div>
         </Fragment>

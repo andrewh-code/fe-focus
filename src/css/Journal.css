@@ -5,6 +5,16 @@ input[type="radio"] {
     width: 0;
 }
 
+label[for="feelingAngry"],
+label[for="feelingReallySad"],
+label[for="feelingSad"],
+label[for="feelingNeutral"],
+label[for="feelingGood"],
+label[for="feelingGreat"] {
+    color: #434e74;
+}
+
+
 label[for="feelingAngry"]:hover {
     color: #b40000;
 }
@@ -71,4 +81,19 @@ input[type=text] {
 
 textarea, input[type=text]:focus {
     outline: none;
+}
+
+.row#previous-entry-list:hover {
+    text-decoration: underline;
+}
+
+button#next-page{
+    background: none;
+    border: none;
+    text-decoration: underline;
+    cursor: pointer;
+    color: #889bd3;
+}
+button#next-page:hover{
+    color: #434e74;
 }
