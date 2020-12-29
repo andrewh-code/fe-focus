@@ -35,7 +35,7 @@ export default function Journal({setAuth}) {
             <div id="journal-outer-container">
                 <Sidebar setAuth = {setAuth} pageWrapId={'page-wrap'} outerContainerId={'journal-outer-container'} />
                 <GlobalHeader setAuth={setAuth}/>
-                <div id="page-wrap" className="container border shadow p-3">
+                <div id="page-wrap" className="container border shadow p-3 bg-white">
                     <center><h1>Journal</h1></center>
                     <ul className="nav nav-pills nav-justified pt-3" id="myTab" role="tablist">
                         <li className="nav-item">
