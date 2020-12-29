@@ -112,71 +112,84 @@ function Dashboard({setAuth}) {
                                 <div className="row pt-3 justify-content-center">
                                     <img id="profile-pic" src={pic}></img>
                                 </div>
+
                                 <div className="row pt-3 justify-content-center">
                                     Profile Picture
                                 </div>
-                                <div className="row pt-3 justify-content-start">
-                                    Personal Details
+                                
+                                <div className="row pt-3"></div>
+
+                                <div className="container border shadow p-3">
+                                    <div className="row pl-3 pt-3 justify-content-start">
+                                        <p id="bold">Personal Details</p>
+                                    </div>
+
+                                    <div className="row justify-content-center">
+                                        <div className="col-3 text-center">
+                                            <b>First Name</b>
+                                            <br />
+                                            {firstname}
+                                        </div>
+                                        <div className="col-3 text-center">
+                                            <b>Last Name</b>
+                                            <br />
+                                            {lastname}
+                                        </div>
+                                        <div className="col-3 text-center">
+                                            <b>Date of Birth</b>
+                                            <br />
+                                            {dob}
+                                        </div>
+                                        <div className="col-3 text-center">
+                                            <b>Address</b>
+                                            <br />
+                                            {address}
+                                        </div>
+                                    </div>
+
+                                    <div className="row pl-3 pt-3 justify-content-center">
+                                        <div className="col-3 text-center">
+                                            <b>City</b>
+                                            <br />
+                                            {city}
+                                        </div>
+                                        <div className="col-3 text-center">
+                                            <b>Province/State</b>
+                                            <br />
+                                            {provinceState}
+                                        </div>
+                                        <div className="col-3 text-center">
+                                            <b>Postal Code</b>
+                                            <br />
+                                            {postalCode}
+                                        </div>
+                                        <div className="col-3 text-center">
+                                            <b>Country</b>
+                                            <br />
+                                            {country}
+                                        </div>
+                                    </div>
+
                                 </div>
-                                <div className="row pt-3 justify-content-center">
-                                    <div className="col-3 text-center">
-                                        <b>First Name</b>
-                                        <br/>
-                                        {firstname}
+                                <div className="row pt-3"></div>
+                                <div className="container border shadow p-3">
+                                    <div className="row pl-3 pt-3 justify-content-start">
+                                        <p id="bold">Contact Information</p>
                                     </div>
-                                    <div className="col-3 text-center">
-                                        <b>Last Name</b>
-                                        <br/>
-                                        {lastname}
-                                    </div>
-                                    <div className="col-3 text-center">
-                                        <b>Date of Birth</b>
-                                        <br/>
-                                        {dob}
-                                    </div>
-                                    <div className="col-3 text-center">
-                                        <b>Address</b>
-                                        <br/>
-                                        {address}
+                                    <div className="row pl-3 justify-content-center">
+                                        <div className="col-3 justify-content-center">
+                                            <b>Email</b>
+                                            <br />
+                                            {email}
+                                        </div>
+                                        <div className="col-3 justify-content-center">
+                                            <b>Phone Number</b>
+                                            <br />
+                                            {phoneNumber}
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="row pt-3 justify-content-center">
-                                <div className="col-3 text-center">
-                                        <b>City</b>
-                                        <br/>
-                                        {city}
-                                    </div>
-                                    <div className="col-3 text-center">
-                                        <b>Province/State</b>
-                                        <br/>
-                                        {provinceState}
-                                    </div>
-                                    <div className="col-3 text-center">
-                                        <b>Postal Code</b>
-                                        <br/>
-                                        {postalCode}
-                                    </div>
-                                    <div className="col-3 text-center">
-                                        <b>Country</b>
-                                        <br/>
-                                        {country}
-                                    </div>
-                                </div>
-                                <div className="row pt-3 justify-content-start">
-                                    Contact Information
-                                </div>
-                                <div className="row pt-3 justify-content-center">
-                                    <div className="col-3 justify-content-center">
-                                        <b>Email</b>
-                                        <br/>
-                                        {email}
-                                    </div>
-                                    <div className="col-3 justify-content-center">
-                                        <b>Phone Number</b>
-                                        <br/>
-                                        {phoneNumber}
-                                    </div>
-                                </div>
+                                
                             </div>
                             {/* <button onClick = {retrieveProfileInfo}>hit server 2</button> */}
                         </div>
