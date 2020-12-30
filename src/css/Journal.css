@@ -86,14 +86,3 @@ textarea, input[type=text]:focus {
 .row#previous-entry-list:hover {
     text-decoration: underline;
 }
-
-button#next-page{
-    background: none;
-    border: none;
-    text-decoration: underline;
-    cursor: pointer;
-    color: #889bd3;
-}
-button#next-page:hover{
-    color: #434e74;
-}

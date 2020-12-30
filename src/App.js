@@ -8,7 +8,7 @@ import axios from 'axios';
 
 // import components
 import LandingPage from './LandingPage';
-import Dashboard from './components/Dashboard';
+import Dashboard from './components/dashboard/Dashboard';
 import Login from './components/login/Login';
 import Register from './components/login/Register';
 import Journal from './components/journal/Journal';

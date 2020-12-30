@@ -48,6 +48,17 @@ input[type=email] {
   border-bottom: 2px solid #A9A9A9;
 }
 
+input[type=text]#profile-input {
+  border: none;
+  background-color: #FFFFFF;
+}
+
+input[type=text]#profile-input:focus {
+  background-color: #e6ddee;
+  border: none;
+  border-bottom: 2px solid #A9A9A9;
+}
+
 /* override bootstrap primary button color */
 .btn-primary, .btn-primary:hover, .btn-primary:visited {
   background-color: #889bd3 !important;
@@ -102,3 +113,15 @@ h1 {
 .container{
   border-radius: 10px;
 }
+
+button#as-link{
+  background: none;
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+  color: #889bd3;
+}
+button#as-link:hover{
+  color: #434e74;
+}
+

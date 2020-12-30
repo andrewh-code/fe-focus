@@ -138,8 +138,8 @@ function PreviousEntries() {
                     </div>
                 </div>
                 <div className="row">
-                    <button id="next-page" onClick={retrievePrevSetOfEntries}>&lt;&lt;</button>
-                    <button id="next-page" onClick={retrieveNextSetOfEntries}>&gt;&gt;</button>
+                    <button id="as-link" onClick={retrievePrevSetOfEntries}>&lt;&lt;</button>
+                    <button id="as-link" onClick={retrieveNextSetOfEntries}>&gt;&gt;</button>
                 </div>
             </div>
         </Fragment>

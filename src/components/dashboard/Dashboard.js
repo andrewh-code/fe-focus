@@ -1,15 +1,15 @@
 import React, { Fragment, useState, useEffect } from 'react'
-import Sidebar from './Sidebar';
-import "../index.css";
-import "../App.css";
-import "../css/Sidebar.css";
-import "../css/Dashboard.css";
+import Sidebar from '../Sidebar';
+import "../../index.css";
+import "../../App.css";
+import "../../css/Sidebar.css";
+import "../../css/Dashboard.css";
 import axios from 'axios';
+import Profile from './Profile';
+import Editable from './Editable';
+import GlobalHeader from '../GlobalHeader';
 
-import GlobalHeader from './GlobalHeader';
-
-import pic from '../assets/images/639_terrakion.png';
-import { Redirect } from 'react-router';
+import pic from '../../assets/images/639_terrakion.png';
 
 function Dashboard({setAuth}) {
     
@@ -28,7 +28,8 @@ function Dashboard({setAuth}) {
     });
     
     const { firstname, lastname, email, address, phoneNumber, dob, country, postalCode, city, provinceState } = profileInfo;
-    
+    const [isEditDisabled, setIsEditDisabled] = useState(true);
+
     const parseToken = (token) =>{
         if (!token){
             return;
@@ -43,6 +44,22 @@ function Dashboard({setAuth}) {
         e.preventDefault();
         localStorage.removeItem("token");   
         setAuth(false);
+    };
+
+    const changeValue = (e) => {
+        setProfileInfo({...profileInfo, [e.target.name]: e.target.value});
+    }
+
+    const makeEditable = (e) => {
+        console.log(profileInfo);
+        setIsEditDisabled(false);
+    };
+
+    const saveUpdateAndMakeUneditable = (e) => {
+        setIsEditDisabled(true);
+
+        // execute axios update
+        
     };
 
     useEffect(() => {
@@ -105,7 +122,10 @@ function Dashboard({setAuth}) {
                         </li>
                     </ul>
                     <div className="tab-content" id="myTabContent">
-                        <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">This is my home tab</div>
+                        <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <Editable/>
+                        </div>
+
                         {/* put this into component? */}
                         <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                             <div className="container pt-5">
@@ -119,6 +139,7 @@ function Dashboard({setAuth}) {
                                 
                                 <div className="row pt-3"></div>
 
+                                {/* <Profile profileInfo={profileInfo}/> */}
                                 <div className="container border shadow p-3">
                                     <div className="row pl-3 pt-3 justify-content-start">
                                         <p id="bold">Personal Details</p>
@@ -126,50 +147,103 @@ function Dashboard({setAuth}) {
 
                                     <div className="row justify-content-center">
                                         <div className="col-3 text-center">
-                                            <b>First Name</b>
-                                            <br />
-                                            {firstname}
+                                        <b>First Name</b>
+                                        <input type="text"
+                                                id="profile-input"
+                                                disabled={isEditDisabled}
+                                                value={firstname}
+                                                name="firstname"
+                                                onChange={changeValue}
+                                            />
                                         </div>
                                         <div className="col-3 text-center">
                                             <b>Last Name</b>
                                             <br />
-                                            {lastname}
+                                            <input type="text"
+                                                id="profile-input"
+                                                disabled={isEditDisabled}
+                                                value={lastname}
+                                                name="lastname"
+                                                onChange={changeValue}
+                                            />
                                         </div>
                                         <div className="col-3 text-center">
                                             <b>Date of Birth</b>
                                             <br />
-                                            {dob}
+                                            <input type="text"
+                                                id="profile-input"
+                                                disabled={isEditDisabled}
+                                                value={dob}
+                                                name="dob"
+                                                onChange={changeValue}
+                                            />
                                         </div>
                                         <div className="col-3 text-center">
                                             <b>Address</b>
                                             <br />
-                                            {address}
+                                            <input type="text"
+                                                id="profile-input"
+                                                disabled={isEditDisabled}
+                                                value={address}
+                                                name="address"
+                                                onChange={changeValue}
+                                            />
                                         </div>
                                     </div>
-
                                     <div className="row pl-3 pt-3 justify-content-center">
                                         <div className="col-3 text-center">
                                             <b>City</b>
                                             <br />
-                                            {city}
+                                            <input type="text"
+                                                id="profile-input"
+                                                disabled={isEditDisabled}
+                                                value={city}
+                                                name="city"
+                                                onChange={changeValue}
+                                            />
                                         </div>
                                         <div className="col-3 text-center">
                                             <b>Province/State</b>
                                             <br />
-                                            {provinceState}
+                                            <input type="text"
+                                                id="profile-input"
+                                                disabled={isEditDisabled}
+                                                value={provinceState}
+                                                name="provinceState"
+                                                onChange={changeValue}
+                                            />
                                         </div>
                                         <div className="col-3 text-center">
                                             <b>Postal Code</b>
                                             <br />
-                                            {postalCode}
+                                            <input type="text"
+                                                id="profile-input"
+                                                disabled={isEditDisabled}
+                                                value={postalCode}
+                                                name="postalCode"
+                                                onChange={changeValue}
+                                            />
                                         </div>
                                         <div className="col-3 text-center">
                                             <b>Country</b>
                                             <br />
-                                            {country}
+                                            <input type="text"
+                                                id="profile-input"
+                                                disabled={isEditDisabled}
+                                                value={country}
+                                                name="country"
+                                                onChange={changeValue}
+                                            />
                                         </div>
                                     </div>
-
+                                    {!isEditDisabled ?
+                                    <div className="row pt-3 justify-content-center">
+                                        <button id="as-link" onClick={makeEditable}>Edit Info</button> 
+                                        <button id="as-link" onClick={saveUpdateAndMakeUneditable}>Save Profile</button> 
+                                    </div> : 
+                                    <div className="row pt-3 justify-content-center">
+                                        <button id="as-link" onClick={makeEditable}>Edit Info</button>
+                                    </div>}
                                 </div>
                                 <div className="row pt-3"></div>
                                 <div className="container border shadow p-3">
@@ -189,11 +263,10 @@ function Dashboard({setAuth}) {
                                         </div>
                                     </div>
                                 </div>
-                                
                             </div>
                             {/* <button onClick = {retrieveProfileInfo}>hit server 2</button> */}
                         </div>
-
+                        
                         <div className="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">This is my contact tab</div>
                     </div>
                     <button className="btn btn-primary" onClick = {e => logout(e)}>Logout</button>

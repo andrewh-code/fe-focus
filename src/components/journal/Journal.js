@@ -6,29 +6,7 @@ import Entry from './Entry';
 import PreviousEntries from './PreviousEntries';
 import Sidebar from '../Sidebar';
 
-export default function Journal({setAuth}) {
-
-    // const renderJournalEntryList = () => {
-        
-    //     var journalEntries = mockEntries.result.journalEntries;
-    //     const output = "";
-    //     resultOutput = journalEntries.map((entry, index) => {
-    //         // var title = entry.title;
-    //         // var content = entry.content;
-    //         // var date = entry.date;
-    //         return (
-    //             // <div key={ index }>
-    //             //     <div className="row border">
-    //             //         <b>Date:</b> {date}
-    //             //         <b>Title:</b> {title}
-    //             //     </div>
-    //             // </div>
-    //             <h1>hi</h1>
-    //         );
-    //     });
-    //     setResultOutput(resultOutput);
-    // }
-    
+export default function Journal({setAuth}) {  
 
     return (
         <Fragment>
