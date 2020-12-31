@@ -40,6 +40,9 @@
 p#error{
   color: red;
 }
+p#success{
+  color: green;
+}
 
 input[type=text], 
 input[type=password], 

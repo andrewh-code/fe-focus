@@ -13,6 +13,11 @@ import pic from '../../assets/images/639_terrakion.png';
 
 function Dashboard({setAuth}) {
     
+    const [isProfileUpdateSuccess, setIsProfileUpdateSuccess] = useState(false);
+    const [isContactUpdateSuccess, setIsContactUpdateSuccess] = useState(false);
+    const [errorMsg, setErrorMsg] = useState();
+    const [successMsg, setSuccessMsg] = useState();
+
     // test profile pic
     const [profileInfo, setProfileInfo] = useState({
         firstname: "",
@@ -28,7 +33,8 @@ function Dashboard({setAuth}) {
     });
     
     const { firstname, lastname, email, address, phoneNumber, dob, country, postalCode, city, provinceState } = profileInfo;
-    const [isEditDisabled, setIsEditDisabled] = useState(true);
+    const [isProfileEditDisabled, setIsProfileEditDisabled] = useState(true);
+    const [isContactEditDisabled, setIsContactEditDisabled] = useState(true);
 
     const parseToken = (token) =>{
         if (!token){
@@ -50,16 +56,93 @@ function Dashboard({setAuth}) {
         setProfileInfo({...profileInfo, [e.target.name]: e.target.value});
     }
 
-    const makeEditable = (e) => {
+    const makeProfileEditable = (e) => {
         console.log(profileInfo);
-        setIsEditDisabled(false);
+        setIsProfileEditDisabled(false);
+    };
+    const makeContactInfoEditable = (e) => {
+        console.log(profileInfo);
+        setIsContactEditDisabled(false);
     };
 
-    const saveUpdateAndMakeUneditable = (e) => {
-        setIsEditDisabled(true);
+    const saveContactAndMakeUneditable = (e) => {
+        setIsContactEditDisabled(true);
 
-        // execute axios update
-        
+        const token = localStorage.getItem("token");
+        if (token) {
+            const decryptedTokenInfo = parseToken(token);
+            const userId = decryptedTokenInfo.userId;
+            const userContactEndpoint = `http://localhost:1236/dashboard/api/users/${userId}/profile/contact`;
+
+            const data = {
+                phoneNumber: phoneNumber
+            };
+
+            axios.put(userContactEndpoint, 
+                data,
+                {
+                    headers: {
+                        'authorization': 'Bearer ' + token
+                }
+            })
+            .then(response => {
+                console.log(response);
+                setIsContactUpdateSuccess(true);
+                setSuccessMsg("Successfully updated user contact information.");
+            }).catch(err => {
+                console.log(err);
+                setIsContactUpdateSuccess(false);
+                setSuccessMsg("Unable to update user contact information. Please try again...");
+            });
+        } else {
+            console.log("bearer token not found...");
+            setIsContactUpdateSuccess(false);
+            setErrorMsg("Unable to update user contact information. Please try again...");
+        }
+
+    };
+
+    const saveProfileUpdateAndMakeUneditable = (e) => {
+        setIsProfileEditDisabled(true);
+
+        const token = localStorage.getItem("token");
+        if (token) {
+            const decryptedTokenInfo = parseToken(token);
+            const userId = decryptedTokenInfo.userId;
+            const userProfileEndpoint = `http://localhost:1236/dashboard/api/users/${userId}/profile`;
+
+            const data = {
+                firstname: firstname,
+                lastname: lastname,
+                dob: dob,
+                streetAddress: address,
+                city: city,
+                provinceState: provinceState,
+                postalCode: postalCode,
+                country: country
+            };
+
+            axios.put(userProfileEndpoint, 
+                data,
+                {
+                    headers: {
+                        'authorization': 'Bearer ' + token
+                }
+            })
+            .then(response => {
+                console.log(response);
+                isProfileUpdateSuccess(true);
+                setSuccessMsg("Successfully updated user profile information.");
+            }).catch(err => {
+                console.log(err);
+                isProfileUpdateSuccess(false);
+                setSuccessMsg("Unable to update user profile information. Please try again...");
+            });
+        } else {
+            console.log("bearer token not found...");
+            isProfileUpdateSuccess(false);
+            setErrorMsg("Unable to update user profile information. Please try again...");
+        }
     };
 
     useEffect(() => {
@@ -70,9 +153,8 @@ function Dashboard({setAuth}) {
         if (token) {
             const decryptedTokenInfo = parseToken(token);
         const userId = decryptedTokenInfo.userId;
-
-        var endpoint = `http://localhost:1236/dashboard/api/users/${userId}/profile`
-        axios.get(endpoint, {
+        const userProfileEndpoint = `http://localhost:1236/dashboard/api/users/${userId}/profile`;
+        axios.get(userProfileEndpoint, {
             headers: {
                 'authorization': 'Bearer ' + token
             }
@@ -126,7 +208,6 @@ function Dashboard({setAuth}) {
                             <Editable/>
                         </div>
 
-                        {/* put this into component? */}
                         <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                             <div className="container pt-5">
                                 <div className="row pt-3 justify-content-center">
@@ -150,7 +231,7 @@ function Dashboard({setAuth}) {
                                         <b>First Name</b>
                                         <input type="text"
                                                 id="profile-input"
-                                                disabled={isEditDisabled}
+                                                disabled={isProfileEditDisabled}
                                                 value={firstname}
                                                 name="firstname"
                                                 onChange={changeValue}
@@ -161,7 +242,7 @@ function Dashboard({setAuth}) {
                                             <br />
                                             <input type="text"
                                                 id="profile-input"
-                                                disabled={isEditDisabled}
+                                                disabled={isProfileEditDisabled}
                                                 value={lastname}
                                                 name="lastname"
                                                 onChange={changeValue}
@@ -172,7 +253,7 @@ function Dashboard({setAuth}) {
                                             <br />
                                             <input type="text"
                                                 id="profile-input"
-                                                disabled={isEditDisabled}
+                                                disabled={isProfileEditDisabled}
                                                 value={dob}
                                                 name="dob"
                                                 onChange={changeValue}
@@ -183,7 +264,7 @@ function Dashboard({setAuth}) {
                                             <br />
                                             <input type="text"
                                                 id="profile-input"
-                                                disabled={isEditDisabled}
+                                                disabled={isProfileEditDisabled}
                                                 value={address}
                                                 name="address"
                                                 onChange={changeValue}
@@ -196,7 +277,7 @@ function Dashboard({setAuth}) {
                                             <br />
                                             <input type="text"
                                                 id="profile-input"
-                                                disabled={isEditDisabled}
+                                                disabled={isProfileEditDisabled}
                                                 value={city}
                                                 name="city"
                                                 onChange={changeValue}
@@ -207,7 +288,7 @@ function Dashboard({setAuth}) {
                                             <br />
                                             <input type="text"
                                                 id="profile-input"
-                                                disabled={isEditDisabled}
+                                                disabled={isProfileEditDisabled}
                                                 value={provinceState}
                                                 name="provinceState"
                                                 onChange={changeValue}
@@ -218,7 +299,7 @@ function Dashboard({setAuth}) {
                                             <br />
                                             <input type="text"
                                                 id="profile-input"
-                                                disabled={isEditDisabled}
+                                                disabled={isProfileEditDisabled}
                                                 value={postalCode}
                                                 name="postalCode"
                                                 onChange={changeValue}
@@ -229,21 +310,24 @@ function Dashboard({setAuth}) {
                                             <br />
                                             <input type="text"
                                                 id="profile-input"
-                                                disabled={isEditDisabled}
+                                                disabled={isProfileEditDisabled}
                                                 value={country}
                                                 name="country"
                                                 onChange={changeValue}
                                             />
                                         </div>
                                     </div>
-                                    {!isEditDisabled ?
+                                    {!isProfileEditDisabled ?
                                     <div className="row pt-3 justify-content-center">
-                                        <button id="as-link" onClick={makeEditable}>Edit Info</button> 
-                                        <button id="as-link" onClick={saveUpdateAndMakeUneditable}>Save Profile</button> 
+                                        <button id="as-link" onClick={makeProfileEditable}>Edit Profile Info</button> 
+                                        <button id="as-link" onClick={saveProfileUpdateAndMakeUneditable}>Save Profile Info</button>
                                     </div> : 
                                     <div className="row pt-3 justify-content-center">
-                                        <button id="as-link" onClick={makeEditable}>Edit Info</button>
+                                        <button id="as-link" onClick={makeProfileEditable}>Edit Profile Info</button>
                                     </div>}
+                                    <div>
+                                        { !isProfileUpdateSuccess ? <p id="error">{errorMsg}</p> : <p id="success">{successMsg}</p>}
+                                    </div>
                                 </div>
                                 <div className="row pt-3"></div>
                                 <div className="container border shadow p-3">
@@ -253,14 +337,35 @@ function Dashboard({setAuth}) {
                                     <div className="row pl-3 justify-content-center">
                                         <div className="col-3 justify-content-center">
                                             <b>Email</b>
-                                            <br />
-                                            {email}
+                                            <input type="text"
+                                                id="profile-input"
+                                                disabled={isContactEditDisabled}
+                                                value={email}
+                                                name="email"
+                                                onChange={changeValue}
+                                            />
                                         </div>
                                         <div className="col-3 justify-content-center">
                                             <b>Phone Number</b>
-                                            <br />
-                                            {phoneNumber}
+                                            <input type="text"
+                                                id="profile-input"
+                                                disabled={isContactEditDisabled}
+                                                value={phoneNumber}
+                                                name="phoneNumber"
+                                                onChange={changeValue}
+                                            />
                                         </div>
+                                    </div>
+                                    {!isContactEditDisabled ?
+                                    <div className="row pt-3 justify-content-center">
+                                        <button id="as-link" onClick={makeContactInfoEditable}>Edit Contact Info</button> 
+                                        <button id="as-link" onClick={saveContactAndMakeUneditable}>Save Contact Info</button>
+                                    </div> : 
+                                    <div className="row pt-3 justify-content-center">
+                                        <button id="as-link" onClick={makeContactInfoEditable}>Edit Contact Info</button>
+                                    </div>}
+                                    <div>
+                                        { !isContactUpdateSuccess ? <p id="error">{errorMsg}</p> : <p id="success">{successMsg}</p>}
                                     </div>
                                 </div>
                             </div>
