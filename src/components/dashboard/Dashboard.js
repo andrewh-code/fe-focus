@@ -57,12 +57,10 @@ function Dashboard({setAuth}) {
     }
 
     const makeProfileEditable = (e) => {
-        console.log(profileInfo);
-        setIsProfileEditDisabled(false);
+        setIsProfileEditDisabled(!isProfileEditDisabled);
     };
     const makeContactInfoEditable = (e) => {
-        console.log(profileInfo);
-        setIsContactEditDisabled(false);
+        setIsContactEditDisabled(!isContactEditDisabled);
     };
 
     const saveContactAndMakeUneditable = (e) => {
@@ -131,16 +129,16 @@ function Dashboard({setAuth}) {
             })
             .then(response => {
                 console.log(response);
-                isProfileUpdateSuccess(true);
+                setIsProfileUpdateSuccess(true);
                 setSuccessMsg("Successfully updated user profile information.");
             }).catch(err => {
                 console.log(err);
-                isProfileUpdateSuccess(false);
+                setIsProfileUpdateSuccess(false);
                 setSuccessMsg("Unable to update user profile information. Please try again...");
             });
         } else {
             console.log("bearer token not found...");
-            isProfileUpdateSuccess(false);
+            setIsProfileUpdateSuccess(false);
             setErrorMsg("Unable to update user profile information. Please try again...");
         }
     };
@@ -205,7 +203,6 @@ function Dashboard({setAuth}) {
                     </ul>
                     <div className="tab-content" id="myTabContent">
                         <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            <Editable/>
                         </div>
 
                         <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
@@ -254,7 +251,7 @@ function Dashboard({setAuth}) {
                                             <input type="text"
                                                 id="profile-input"
                                                 disabled={isProfileEditDisabled}
-                                                value={dob}
+                                                value={new Date(dob).toLocaleDateString()}
                                                 name="dob"
                                                 onChange={changeValue}
                                             />
@@ -374,7 +371,6 @@ function Dashboard({setAuth}) {
                         
                         <div className="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">This is my contact tab</div>
                     </div>
-                    <button className="btn btn-primary" onClick = {e => logout(e)}>Logout</button>
                 </div>
             </div>
         </Fragment>
