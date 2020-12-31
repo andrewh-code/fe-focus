@@ -6,7 +6,6 @@ import "../../css/Sidebar.css";
 import "../../css/Dashboard.css";
 import axios from 'axios';
 import Profile from './Profile';
-import Editable from './Editable';
 import GlobalHeader from '../GlobalHeader';
 
 import pic from '../../assets/images/639_terrakion.png';
