@@ -9,6 +9,7 @@ import Profile from './Profile';
 import GlobalHeader from '../GlobalHeader';
 
 import pic from '../../assets/images/639_terrakion.png';
+import ChildDashboard from './ChildDashboard';
 
 function Dashboard({setAuth}) {
     
@@ -202,6 +203,7 @@ function Dashboard({setAuth}) {
                     </ul>
                     <div className="tab-content" id="myTabContent">
                         <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <ChildDashboard />
                         </div>
 
                         <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
