@@ -11,9 +11,9 @@ function GlobalHeader({setAuth}) {
 
     return (
         <div className="container-fluid d-flex justify-content-end">
-            <a 
+            {/* <a 
                 href="/"
-                onClick = {e => logout(e)}>logout</a>
+                onClick = {e => logout(e)}>logout</a> */}
         </div>
     )
 }

@@ -87,7 +87,7 @@ export default function ChildDashboard() {
 
         </div>
         <div className="container pt-2 shadow p-3 mb-5 bg-white rounded">
-            <h3>Welcome {name}</h3>
+            <h3>Welcome</h3>
 
             <p id="bold">Member since:</p> <p> {memberSince}</p> 
             <p id="bold">Last Journal Entry: </p>
