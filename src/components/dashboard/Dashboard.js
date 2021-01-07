@@ -225,7 +225,7 @@ function Dashboard({setAuth}) {
                                     </div>
 
                                     <div className="row justify-content-center">
-                                        <div className="col-3 text-center">
+                                        <div className="col-3 justify-content-center">
                                         <b>First Name</b>
                                         <input type="text"
                                                 id="profile-input"
@@ -235,7 +235,7 @@ function Dashboard({setAuth}) {
                                                 onChange={changeValue}
                                             />
                                         </div>
-                                        <div className="col-3 text-center">
+                                        <div className="col-3 justify-content-center">
                                             <b>Last Name</b>
                                             <br />
                                             <input type="text"
@@ -246,7 +246,7 @@ function Dashboard({setAuth}) {
                                                 onChange={changeValue}
                                             />
                                         </div>
-                                        <div className="col-3 text-center">
+                                        <div className="col-3 justify-content-center">
                                             <b>Date of Birth</b>
                                             <br />
                                             <input type="text"
@@ -257,7 +257,7 @@ function Dashboard({setAuth}) {
                                                 onChange={changeValue}
                                             />
                                         </div>
-                                        <div className="col-3 text-center">
+                                        <div className="col-3 justify-content-center">
                                             <b>Address</b>
                                             <br />
                                             <input type="text"
@@ -270,7 +270,7 @@ function Dashboard({setAuth}) {
                                         </div>
                                     </div>
                                     <div className="row pl-3 pt-3 justify-content-center">
-                                        <div className="col-3 text-center">
+                                        <div className="col-3 justify-content-center">
                                             <b>City</b>
                                             <br />
                                             <input type="text"
@@ -281,7 +281,7 @@ function Dashboard({setAuth}) {
                                                 onChange={changeValue}
                                             />
                                         </div>
-                                        <div className="col-3 text-center">
+                                        <div className="col-3 justify-content-center">
                                             <b>Province/State</b>
                                             <br />
                                             <input type="text"
@@ -292,7 +292,7 @@ function Dashboard({setAuth}) {
                                                 onChange={changeValue}
                                             />
                                         </div>
-                                        <div className="col-3 text-center">
+                                        <div className="col-3 justify-content-center">
                                             <b>Postal Code</b>
                                             <br />
                                             <input type="text"
@@ -303,7 +303,7 @@ function Dashboard({setAuth}) {
                                                 onChange={changeValue}
                                             />
                                         </div>
-                                        <div className="col-3 text-center">
+                                        <div className="col-3 justify-content-center">
                                             <b>Country</b>
                                             <br />
                                             <input type="text"
@@ -334,7 +334,7 @@ function Dashboard({setAuth}) {
                                     </div>
                                     <div className="row pl-3 justify-content-center">
                                         <div className="col-3 justify-content-center">
-                                            <b>Email</b>
+                                            <b>Email</b><br/>
                                             <input type="text"
                                                 id="profile-input"
                                                 disabled={isContactEditDisabled}

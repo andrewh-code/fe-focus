@@ -26,6 +26,11 @@ function App() {
 
   async function isAuth() {
     try {
+
+      // check to see if token is in storage
+      if (!localStorage.token){
+        throw `token not found in storage`;
+      }
       const serverResponse = await axios.get(endpoint, {
         headers:{
           'Content-Type': 'application/json',
@@ -55,20 +60,20 @@ function App() {
        <Router>
           <Switch>
             <Route exact path = "/"
-              render = {props => !isAuthenticated ? <Login {...props} setAuth = {setAuth}/> : <Redirect to = "/dashboard" />}
+              render = {props => !isAuth() ? <Login {...props} setAuth = {setAuth}/> : <Redirect to = "/dashboard" />}
               />
             <Route exact path = "/forgot" component={ForgotPassword}/>
             <Route exact path = "/login" 
-              render = {props => !isAuthenticated ? <Login {...props} setAuth = {setAuth}/> : <Redirect to = "/dashboard" />}
+              render = {props => !isAuth() ? <Login {...props} setAuth = {setAuth}/> : <Redirect to = "/dashboard" />}
             />
             <Route exact path = "/register" 
-              render = {props => !isAuthenticated ? <Register {...props} setAuth = {setAuth}/> : <Redirect to = "/login"/>}
+              render = {props => !isAuth() ? <Register {...props} setAuth = {setAuth}/> : <Redirect to = "/login"/>}
               />
             <Route exact path = "/dashboard" 
-              render = {props => isAuthenticated ? <Dashboard {...props} setAuth = {setAuth}/> : <Redirect to = "/login" />}
+              render = {props => isAuth() ? <Dashboard {...props} setAuth = {setAuth}/> : <Redirect to = "/login" />}
             />
             <Route exact path = "/journal"
-              render = {props => isAuthenticated ? <Journal {...props} setAuth = {setAuth}/> : <Redirect to ="/login" />}
+              render = {props => isAuth() ? <Journal {...props} setAuth = {setAuth}/> : <Redirect to ="/login" />}
             />
           </Switch>
       </Router>
