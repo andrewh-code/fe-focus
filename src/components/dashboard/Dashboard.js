@@ -203,7 +203,7 @@ function Dashboard({setAuth}) {
                     </ul>
                     <div className="tab-content" id="myTabContent">
                         <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            <ChildDashboard />
+                            <ChildDashboard firstname={firstname}/>
                         </div>
 
                         <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">

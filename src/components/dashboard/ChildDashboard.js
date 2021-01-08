@@ -3,7 +3,7 @@ import React, { Fragment, useState, useEffect } from 'react'
 import axios from 'axios';
 import { ServerResponse } from 'http';
 
-export default function ChildDashboard() {
+export default function ChildDashboard({firstname}) {
     
     const [name, setName] = useState("Andrew");
     const [memberSince, setMemberSince] = useState();
@@ -87,7 +87,7 @@ export default function ChildDashboard() {
 
         </div>
         <div className="container pt-2 shadow p-3 mb-5 bg-white rounded">
-            <h3>Welcome</h3>
+            <h3>Welcome {firstname}</h3>
 
             <p id="bold">Member since:</p> <p> {memberSince}</p> 
             <p id="bold">Last Journal Entry: </p>
