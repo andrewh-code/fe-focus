@@ -2,6 +2,7 @@ import Axios from 'axios';
 import React, { Fragment, useState, useEffect } from 'react'
 import axios from 'axios';
 import { ServerResponse } from 'http';
+import * as DateUtils from '../../utilities/date';
 
 export default function ChildDashboard({firstname}) {
     
@@ -37,7 +38,7 @@ export default function ChildDashboard({firstname}) {
         .then(serverResponse => {
             console.log(serverResponse);
             var memberSince = serverResponse.data.result.createdOnDate;
-            memberSince = new Date(memberSince).toLocaleDateString();
+            memberSince = DateUtils.formatDate(memberSince);
             setMemberSince(memberSince)
         })
         .catch(err => {
@@ -63,7 +64,7 @@ export default function ChildDashboard({firstname}) {
         .then(serverResponse => {
             console.log(serverResponse);
             var latestEntryDate = serverResponse.data.date;
-            latestEntryDate = new Date(latestEntryDate).toLocaleDateString();
+            latestEntryDate = DateUtils.formatDate(latestEntryDate);
             var latestEntryTitle = serverResponse.data.title;
 
             setLatestEntryDate(latestEntryDate);

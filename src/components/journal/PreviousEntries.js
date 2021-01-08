@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react'
 import axios from 'axios';
+import * as DateUtils from '../../utilities/date';
 
 function PreviousEntries() {
     const LIMIT = 10;
@@ -74,7 +75,8 @@ function PreviousEntries() {
     }, [entryOffset]);
 
     const updateEntry = (index, entry) => {
-        var date = new Date(entry.date).toLocaleDateString();
+        
+        var date = DateUtils.formatDate(entry.date);
         var entryOutput = 
             <div>
                 <b>Date:</b> {date}
@@ -99,7 +101,8 @@ function PreviousEntries() {
         output = await Promise.all(journalEntries.map((entry, index) => {
             var title = entry.title;
             var content = entry.content;
-            var date = new Date(entry.date).toLocaleDateString();
+            var date = DateUtils.formatDate(entry.date);
+            
             
             return (
                 <div key={ index }>

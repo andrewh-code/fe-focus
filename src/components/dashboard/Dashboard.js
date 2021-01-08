@@ -7,7 +7,7 @@ import "../../css/Dashboard.css";
 import axios from 'axios';
 import Profile from './Profile';
 import GlobalHeader from '../GlobalHeader';
-
+import * as DateUtils from '../../utilities/date';
 import pic from '../../assets/images/639_terrakion.png';
 import ChildDashboard from './ChildDashboard';
 
@@ -252,7 +252,7 @@ function Dashboard({setAuth}) {
                                             <input type="text"
                                                 id="profile-input"
                                                 disabled={isProfileEditDisabled}
-                                                value={new Date(dob).toLocaleDateString()}
+                                                value={DateUtils.formatDate(dob)}
                                                 name="dob"
                                                 onChange={changeValue}
                                             />
