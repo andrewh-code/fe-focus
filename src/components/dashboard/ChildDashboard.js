@@ -5,6 +5,8 @@ import { ServerResponse } from 'http';
 import * as DateUtils from '../../utilities/date/dateutils';
 import * as TokenUtils from '../../utilities/token/tokenutils';
 
+import * as DashboardService from '../../service/dashboard/DashboardService';
+
 export default function ChildDashboard({firstname}) {
     
     const [name, setName] = useState("Andrew");
@@ -16,26 +18,29 @@ export default function ChildDashboard({firstname}) {
 
     const retrieveUserCreationDate = (userId, token) => {
 
-        const retrieveCreationDateEndpoint = `http://localhost:1236/dashboard/api/users/${userId}/created`;
+        // const retrieveCreationDateEndpoint = `http://localhost:1236/dashboard/api/users/${userId}/created`;
         
-        axios({
-            method: 'get',
-            url: retrieveCreationDateEndpoint,
-            headers: {
-                'Content-Type': 'application/json',
-                'authorization': 'Bearer ' + token
-            }
-        })
-        .then(serverResponse => {
-            console.log(serverResponse);
-            var memberSince = serverResponse.data.result.createdOnDate;
-            memberSince = DateUtils.formatDate(memberSince);
-            setMemberSince(memberSince)
-        })
-        .catch(err => {
-            console.log(err)
-            console.log("error: " + err.response);
-        });
+        // axios({
+        //     method: 'get',
+        //     url: retrieveCreationDateEndpoint,
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         'authorization': 'Bearer ' + token
+        //     }
+        // })
+        // .then(serverResponse => {
+        //     console.log(serverResponse);
+        //     var memberSince = serverResponse.data.result.createdOnDate;
+        //     memberSince = DateUtils.formatDate(memberSince);
+        //     setMemberSince(memberSince)
+        // })
+        // .catch(err => {
+        //     console.log(err)
+        //     console.log("error: " + err.response);
+        // });
+
+        const memberSince = DashboardService.retrieveUserCreationDate(userId, token);
+        setMemberSince(memberSince);
     }
 
     const retrieveLastEntryDate = (userId, token) => {
