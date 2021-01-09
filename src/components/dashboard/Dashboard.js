@@ -7,7 +7,7 @@ import "../../css/Dashboard.css";
 import axios from 'axios';
 import Profile from './Profile';
 import GlobalHeader from '../GlobalHeader';
-import * as DateUtils from '../../utilities/date';
+import * as DateUtils from '../../utilities/date/dateutils';
 import pic from '../../assets/images/639_terrakion.png';
 import ChildDashboard from './ChildDashboard';
 

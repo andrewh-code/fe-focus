@@ -2,7 +2,8 @@ import Axios from 'axios';
 import React, { Fragment, useState, useEffect } from 'react'
 import axios from 'axios';
 import { ServerResponse } from 'http';
-import * as DateUtils from '../../utilities/date';
+import * as DateUtils from '../../utilities/date/dateutils';
+import * as TokenUtils from '../../utilities/token/tokenutils';
 
 export default function ChildDashboard({firstname}) {
     
@@ -10,23 +11,13 @@ export default function ChildDashboard({firstname}) {
     const [memberSince, setMemberSince] = useState();
     const [latestEntryTitle, setLatestEntryTitle] = useState();
     const [latestEntryDate, setLatestEntryDate] = useState();
+    const [token, setToken] = useState(TokenUtils.getToken());
+    const [userId, setUserId] = useState(TokenUtils.getUserIdFromToken());
 
-    const parseToken = (token) =>{
-        if (!token){
-            return;
-        }
-        const url = token.split('.')[1];
-        const base = url.replace('-', '+').replace('_', '/');
-        return JSON.parse(window.atob(base)); 
-    };
+    const retrieveUserCreationDate = (userId, token) => {
 
-    const retrieveUserCreationDate = () => {
-
-        const token = localStorage.getItem("token");
-        const decryptedTokenInfo = parseToken(token);
-        const userId = decryptedTokenInfo.userId;
         const retrieveCreationDateEndpoint = `http://localhost:1236/dashboard/api/users/${userId}/created`;
-
+        
         axios({
             method: 'get',
             url: retrieveCreationDateEndpoint,
@@ -48,11 +39,8 @@ export default function ChildDashboard({firstname}) {
     }
 
     const retrieveLastEntryDate = () => {
-        const token = localStorage.getItem("token");
-        const decryptedTokenInfo = parseToken(token);
-        const userId = decryptedTokenInfo.userId;
+        
         const retrieveLatestEntryEndpoint = `http://localhost:1237/journal/api/users/${userId}/entries/latest`;
-
         axios({
             method: 'get',
             url: retrieveLatestEntryEndpoint,
@@ -78,8 +66,8 @@ export default function ChildDashboard({firstname}) {
 
     
     useEffect(() => {
-        retrieveUserCreationDate();
-        retrieveLastEntryDate();
+        retrieveUserCreationDate(userId, token);
+        retrieveLastEntryDate(userId, token);
     });
 
     return (

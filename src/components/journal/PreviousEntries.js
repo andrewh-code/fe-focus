@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react'
 import axios from 'axios';
-import * as DateUtils from '../../utilities/date';
+import * as DateUtils from '../../utilities/date/dateutils';
 
 function PreviousEntries() {
     const LIMIT = 10;
