@@ -38,8 +38,8 @@ export default function ChildDashboard({firstname}) {
         });
     }
 
-    const retrieveLastEntryDate = () => {
-        
+    const retrieveLastEntryDate = (userId, token) => {
+
         const retrieveLatestEntryEndpoint = `http://localhost:1237/journal/api/users/${userId}/entries/latest`;
         axios({
             method: 'get',
