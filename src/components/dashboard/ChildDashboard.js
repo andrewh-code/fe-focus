@@ -1,16 +1,12 @@
-import Axios from 'axios';
 import React, { Fragment, useState, useEffect } from 'react'
-import axios from 'axios';
-import { ServerResponse } from 'http';
 import * as DateUtils from '../../utilities/date/dateutils';
 import * as TokenUtils from '../../utilities/token/tokenutils';
 
 import * as DashboardService from '../../service/dashboard/DashboardService';
-import Dashboard from './Dashboard';
 
 export default function ChildDashboard({firstname}) {
     
-    const [name, setName] = useState("Andrew");
+    const [name, setName] = useState("");
     const [memberSince, setMemberSince] = useState();
     const [latestEntryTitle, setLatestEntryTitle] = useState();
     const [latestEntryDate, setLatestEntryDate] = useState();
@@ -19,18 +15,27 @@ export default function ChildDashboard({firstname}) {
 
     const retrieveUserCreationDate = async (userId, token) => {
         let createdOnDate = await DashboardService.retrieveUserCreationDate(userId, token);
-        createdOnDate = DateUtils.formatDate(createdOnDate);
-        console.log("created on date is: " + createdOnDate)
-        setMemberSince(createdOnDate);
+        if (!createdOnDate){
+            setMemberSince("");
+        } else {
+            createdOnDate = DateUtils.formatDate(createdOnDate);
+            setMemberSince(createdOnDate);
+        }
+        
     }
 
     const retrieveLastEntryDate = async (userId, token) => {
         let serverResponse = await DashboardService.retrieveLastEntry(userId, token);
-        var latestEntryDate = serverResponse.date;
-        latestEntryDate = DateUtils.formatDate(latestEntryDate);
-        var latestEntryTitle = serverResponse.title;
-        setLatestEntryDate(latestEntryDate);
-        setLatestEntryTitle(latestEntryTitle);
+        if (!serverResponse){
+            setLatestEntryTitle("");
+            setLatestEntryDate("");
+        } else {
+            var latestEntryDate = serverResponse.date;
+            latestEntryDate = DateUtils.formatDate(latestEntryDate);
+            var latestEntryTitle = serverResponse.title;
+            setLatestEntryDate(latestEntryDate);
+            setLatestEntryTitle(latestEntryTitle);
+        }
     }
 
     useEffect(() => {

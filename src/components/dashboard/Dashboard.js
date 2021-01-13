@@ -10,6 +10,7 @@ import GlobalHeader from '../GlobalHeader';
 import * as DateUtils from '../../utilities/date/dateutils';
 import pic from '../../assets/images/639_terrakion.png';
 import ChildDashboard from './ChildDashboard';
+import * as DashboardService from '../../service/dashboard/DashboardService';
 
 function Dashboard({setAuth}) {
     
@@ -151,35 +152,32 @@ function Dashboard({setAuth}) {
         if (token) {
             const decryptedTokenInfo = parseToken(token);
         const userId = decryptedTokenInfo.userId;
-        const userProfileEndpoint = `http://localhost:1236/dashboard/api/users/${userId}/profile`;
-        axios.get(userProfileEndpoint, {
-            headers: {
-                'authorization': 'Bearer ' + token
-            }
-        })
-            .then(response => {
-                if (mounted) {
-                    console.log(response.data);
-                    // format the date                
+
+        
+        // const userProfileEndpoint = `http://localhost:1236/dashboard/api/users/${userId}/profile`;
+        async function fetchData() {
+            const serverResponse = await DashboardService.retrieveProfileInfo(userId, token);
+            if (mounted) {
+                if (!serverResponse){
+                    setProfileInfo("")
+                } else {
                     setProfileInfo({
-                        firstname: response.data.result.firstname,
-                        lastname: response.data.result.lastname,
-                        email: response.data.result.lastname,
-                        dob: response.data.result.dob,
-                        address: response.data.result.streetAddress,
-                        phoneNumber: response.data.result.phoneNumber,
-                        country: response.data.result.country,
-                        provinceState: response.data.result.provinceState,
-                        postalCode: response.data.result.postalCode,
-                        city: response.data.result.city
+                        firstname: serverResponse.firstname,
+                        lastname: serverResponse.lastname,
+                        email: serverResponse.lastname,
+                        dob: serverResponse.dob,
+                        address: serverResponse.streetAddress,
+                        phoneNumber: serverResponse.phoneNumber,
+                        country: serverResponse.country,
+                        provinceState: serverResponse.provinceState,
+                        postalCode: serverResponse.postalCode,
+                        city: serverResponse.city
                     });
                 }
-            })
-            .catch((err) => {
-                console.log(err);
-            })
+            }
         }
-        
+        fetchData();
+        }
         return () => mounted = false;
     }, []);
 
@@ -224,7 +222,7 @@ function Dashboard({setAuth}) {
                                         <p id="bold">Personal Details</p>
                                     </div>
 
-                                    <div className="row justify-content-center">
+                                    <div className="row pl pt-3 justify-content-center">
                                         <div className="col-3 justify-content-center">
                                         <b>First Name</b>
                                         <input type="text"

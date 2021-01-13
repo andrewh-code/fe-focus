@@ -16,7 +16,7 @@ export const retrieveUserCreationDate = async (userId, token) => {
     } catch (err) {
         console.log(err);
         console.log("error: " + err.response);
-        return err.response;
+        return null;
     }
 }
 
@@ -30,15 +30,35 @@ export const retrieveLastEntry = async (userId, token) => {
                 'authorization': 'Bearer ' + token
             }
         })
-        
+
         return serverResponse.data;
 
     } catch (err) {
         console.log(err)
         console.log("error: " + err.response);
-        return err.response;
+        return null;
     }
 
+}
 
+
+export const retrieveProfileInfo = async (userId, token) => {
+
+    const userProfileEndpoint = `http://localhost:1236/dashboard/api/users/${userId}/profile`;
+    try {
+        const serverResponse = await axios.get(userProfileEndpoint, {
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': 'Bearer ' + token
+            }
+        })
+
+        return serverResponse.data.result;
+
+    } catch (err) {
+        console.log(err);
+        console.log("error: " + err.response);
+        return null;
+    }
 
 }
