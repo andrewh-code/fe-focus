@@ -6,6 +6,7 @@ import * as DateUtils from '../../utilities/date/dateutils';
 import * as TokenUtils from '../../utilities/token/tokenutils';
 
 import * as DashboardService from '../../service/dashboard/DashboardService';
+import Dashboard from './Dashboard';
 
 export default function ChildDashboard({firstname}) {
     
@@ -16,60 +17,22 @@ export default function ChildDashboard({firstname}) {
     const [token, setToken] = useState(TokenUtils.getToken());
     const [userId, setUserId] = useState(TokenUtils.getUserIdFromToken());
 
-    const retrieveUserCreationDate = (userId, token) => {
-
-        // const retrieveCreationDateEndpoint = `http://localhost:1236/dashboard/api/users/${userId}/created`;
-        
-        // axios({
-        //     method: 'get',
-        //     url: retrieveCreationDateEndpoint,
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //         'authorization': 'Bearer ' + token
-        //     }
-        // })
-        // .then(serverResponse => {
-        //     console.log(serverResponse);
-        //     var memberSince = serverResponse.data.result.createdOnDate;
-        //     memberSince = DateUtils.formatDate(memberSince);
-        //     setMemberSince(memberSince)
-        // })
-        // .catch(err => {
-        //     console.log(err)
-        //     console.log("error: " + err.response);
-        // });
-
-        const memberSince = DashboardService.retrieveUserCreationDate(userId, token);
-        setMemberSince(memberSince);
+    const retrieveUserCreationDate = async (userId, token) => {
+        let createdOnDate = await DashboardService.retrieveUserCreationDate(userId, token);
+        createdOnDate = DateUtils.formatDate(createdOnDate);
+        console.log("created on date is: " + createdOnDate)
+        setMemberSince(createdOnDate);
     }
 
-    const retrieveLastEntryDate = (userId, token) => {
-
-        const retrieveLatestEntryEndpoint = `http://localhost:1237/journal/api/users/${userId}/entries/latest`;
-        axios({
-            method: 'get',
-            url: retrieveLatestEntryEndpoint,
-            headers: {
-                'Content-Type': 'application/json',
-                'authorization': 'Bearer ' + token
-            }
-        })
-        .then(serverResponse => {
-            console.log(serverResponse);
-            var latestEntryDate = serverResponse.data.date;
-            latestEntryDate = DateUtils.formatDate(latestEntryDate);
-            var latestEntryTitle = serverResponse.data.title;
-
-            setLatestEntryDate(latestEntryDate);
-            setLatestEntryTitle(latestEntryTitle);
-        })
-        .catch(err => {
-            console.log(err)
-            console.log("error: " + err.response);
-        });
+    const retrieveLastEntryDate = async (userId, token) => {
+        let serverResponse = await DashboardService.retrieveLastEntry(userId, token);
+        var latestEntryDate = serverResponse.date;
+        latestEntryDate = DateUtils.formatDate(latestEntryDate);
+        var latestEntryTitle = serverResponse.title;
+        setLatestEntryDate(latestEntryDate);
+        setLatestEntryTitle(latestEntryTitle);
     }
 
-    
     useEffect(() => {
         retrieveUserCreationDate(userId, token);
         retrieveLastEntryDate(userId, token);
