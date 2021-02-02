@@ -2,7 +2,13 @@
 Project focus is a microservice based journalling app which allows users to register, login, create/update their profiles, and as well as write in their journals. The focus of this project was to create a full stack web application that is separated into small(er) services as opposed to creating a monolithic service.
 
 ## <u>Demo</u>
-Watch the youtube [demo](https://www.youtube.com/watch?v=a1uEq9twGnA)
+Watch directly on [Youtube](https://www.youtube.com/watch?v=a1uEq9twGnA)
+
+<iframe width="480" height="300"
+src="https://www.youtube.com/watch?v=a1uEq9twGnA" 
+frameborder="0" 
+allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+allowfullscreen></iframe>
 
 ## <u>To Run</u>
 ### Front-end
