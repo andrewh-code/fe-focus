@@ -56,11 +56,11 @@ The journalling feature was separated into its own service so it can directly co
 ## <u>Screenshots</u>
 
 __Journal Entry__
-![Journal Entry](../screenshots/journal_entry.png)
+![Journal Entry](screenshots/journal_entry.png)
 
 __Previous Entries__
-![Prevoius Entries](../screenshots/previous_entries.png)
+![Prevoius Entries](screenshots/previous_entries.png)
 
 __Profile Dashboard__
-![Profile Dashboard](../screenshots/profile_dashboard.png)
+![Profile Dashboard](screenshots/profile_dashboard.png)
 
