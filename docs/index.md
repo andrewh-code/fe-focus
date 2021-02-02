@@ -50,3 +50,16 @@ The journalling feature was separated into its own service so it can directly co
 - Express.js
 - PostgreSQL (Elephant SQL - Postgres As A Service)
 - MongoDB (MongoDB as a service)
+
+
+## <u>Screenshots</u>
+
+__Journal Entry__
+![Journal Entry](../screenshots/journal_entry.png)
+
+__Previous Entries__
+![Prevoius Entries](../screenshots/previous_entries.png)
+
+__Profile Dashboard__
+![Profile Dashboard](../screenshots/profile_dashboard.png)
+
