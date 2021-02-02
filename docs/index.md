@@ -41,6 +41,7 @@ The journalling feature was separated into its own service so it can directly co
 
 ### Front-end
 - React (Hooks)
+    - bootstrapped with [Create React App](https://github.com/facebook/create-react-app)
 - Bootstrap
 - CSS
 
