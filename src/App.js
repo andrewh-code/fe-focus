@@ -60,20 +60,20 @@ function App() {
        <Router>
           <Switch>
             <Route exact path = "/"
-              render = {props => !isAuth() ? <Login {...props} setAuth = {setAuth}/> : <Redirect to = "/dashboard" />}
+              render = {props => !isAuthenticated ? <Login {...props} setAuth = {setAuth}/> : <Redirect to = "/dashboard" />}
               />
             <Route exact path = "/forgot" component={ForgotPassword}/>
             <Route exact path = "/login" 
-              render = {props => !isAuth() ? <Login {...props} setAuth = {setAuth}/> : <Redirect to = "/dashboard" />}
+              render = {props => !isAuthenticated ? <Login {...props} setAuth = {setAuth}/> : <Redirect to = "/dashboard" />}
             />
             <Route exact path = "/register" 
-              render = {props => !isAuth() ? <Register {...props} setAuth = {setAuth}/> : <Redirect to = "/login"/>}
+              render = {props => !isAuthenticated ? <Register {...props} setAuth = {setAuth}/> : <Redirect to = "/login"/>}
               />
             <Route exact path = "/dashboard" 
-              render = {props => isAuth() ? <Dashboard {...props} setAuth = {setAuth}/> : <Redirect to = "/login" />}
+              render = {props => isAuthenticated ? <Dashboard {...props} setAuth = {setAuth}/> : <Redirect to = "/login" />}
             />
             <Route exact path = "/journal"
-              render = {props => isAuth() ? <Journal {...props} setAuth = {setAuth}/> : <Redirect to ="/login" />}
+              render = {props => isAuthenticated ? <Journal {...props} setAuth = {setAuth}/> : <Redirect to ="/login" />}
             />
           </Switch>
       </Router>
