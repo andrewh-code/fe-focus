@@ -4,11 +4,7 @@ Project focus is a microservice based journalling app which allows users to regi
 ## <u>Demo</u>
 Watch directly on [Youtube](https://www.youtube.com/watch?v=a1uEq9twGnA)
 
-<iframe width="480" height="300"
-src="https://www.youtube.com/watch?v=a1uEq9twGnA" 
-frameborder="0" 
-allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/a1uEq9twGnA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## <u>To Run</u>
 ### Front-end
